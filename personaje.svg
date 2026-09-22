@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 400" role="img" aria-labelledby="title description">
+  <title id="title">Retrato astral provisional</title>
+  <desc id="description">Silueta de un personaje frente a un cielo estrellado en tonos turquesa y violeta.</desc>
+  <defs>
+    <radialGradient id="sky" cx="42%" cy="30%" r="80%">
+      <stop offset="0" stop-color="#294c73"/>
+      <stop offset=".5" stop-color="#111d3e"/>
+      <stop offset="1" stop-color="#050817"/>
+    </radialGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#7ce7e6" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#b693ff" stop-opacity=".25"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="5"/></filter>
+  </defs>
+  <rect width="320" height="400" fill="url(#sky)"/>
+  <g fill="#d9ffff">
+    <circle cx="52" cy="74" r="1.5"/><circle cx="91" cy="38" r="1"/><circle cx="147" cy="83" r="1.2"/>
+    <circle cx="257" cy="61" r="1.7"/><circle cx="285" cy="118" r="1"/><circle cx="211" cy="27" r=".9"/>
+    <circle cx="26" cy="156" r=".8"/><circle cx="238" cy="155" r="1.1"/>
+  </g>
+  <path d="M0 300 Q60 270 120 298 T240 294 T340 282 V400 H0Z" fill="url(#sea)"/>
+  <path d="M0 318 Q72 292 138 317 T320 306" fill="none" stroke="#7ce7e6" stroke-opacity=".38"/>
+  <circle cx="160" cy="143" r="53" fill="#7ce7e6" opacity=".18" filter="url(#glow)"/>
+  <path d="M126 132 Q129 89 160 85 Q194 89 197 132 Q197 170 176 185 L183 210 Q224 226 242 287 L242 400 H76 V287 Q95 226 137 210 L144 185 Q123 169 126 132Z" fill="#07101f"/>
+  <path d="M121 126 Q133 82 160 80 Q192 81 204 126 L190 112 L180 93 L166 111 L149 94 L137 116Z" fill="#101c34"/>
+  <path d="M100 254 Q160 278 220 254" fill="none" stroke="#7ce7e6" stroke-opacity=".42"/>
+  <path d="M160 210 V360 M108 282 Q160 310 212 282" fill="none" stroke="#b693ff" stroke-opacity=".2"/>
+  <path d="M160 236 l5 12 13 2-10 9 3 13-11-7-11 7 3-13-10-9 13-2Z" fill="#7ce7e6" opacity=".85"/>
+</svg>

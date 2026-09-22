@@ -1,155 +1,148 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Mistelar webpage</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mistelar: una campaña de rol entre mares astrales, mundos lejanos y destinos compartidos.">
+    <meta name="theme-color" content="#050817">
+    <title>Mistelar · Un mismo cielo</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <canvas class="starfield" aria-hidden="true"></canvas>
 
-    <header>
-        <nav class="navbar">
-
-            <a href="#" class="logo">
-                Mistelar
+    <header class="site-header">
+        <nav class="navbar" aria-label="Navegación principal">
+            <a href="#presentacion" class="logo" aria-label="Mistelar, inicio">
+                <span class="logo-mark" aria-hidden="true">✦</span>
+                <span>Mistelar</span>
             </a>
-
-            <div class="nav-links">
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+                <span class="sr-only">Abrir menú</span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </button>
+            <div class="nav-links" id="nav-links">
                 <a href="#presentacion">Presentación</a>
-                <a href="#sesion_cero">Sesión cero</a>
+                <a href="#sesion-cero">Sesión cero</a>
                 <a href="#reglas">Reglas</a>
-                <a href="#crónicas">Crónicas</a>
+                <a href="#cronicas">Crónicas</a>
             </div>
-
         </nav>
     </header>
 
-
     <aside class="music-player" aria-label="Música de fondo">
-        <button id="music-toggle" type="button" aria-pressed="false" disabled>Reproducir música</button>
-        <label for="music-volume">Volumen</label>
+        <div class="music-copy">
+            <span aria-hidden="true">♫</span>
+            <div>
+                <strong>Un mismo cielo</strong>
+                <p id="music-status" role="status">Activa JavaScript para escuchar la melodía.</p>
+            </div>
+        </div>
+        <button id="music-toggle" type="button" aria-pressed="false" disabled>Reproducir</button>
+        <label class="sr-only" for="music-volume">Volumen de la música</label>
         <input id="music-volume" type="range" min="0" max="100" value="30" disabled>
-        <p id="music-status" role="status">Activa JavaScript para escuchar la música.</p>
     </aside>
 
-    <main>
-
+    <main id="contenido">
         <section id="presentacion" class="hero">
-
-            <div class="hero-content">
-
-                <p class="subtitulo">
-                    Ahí fuera hay muchos mundos... Pero todos comparten el mismo cielo.
-                </p>
-
-                <h1> Un mismo cielo. 
-                    Un mismo destino.</h1>
-
-                <h2 >
-                    Unámoslos. Ese es mi sueño.
-                </h2>
-
+            <div class="hero-orbit orbit-one" aria-hidden="true"></div>
+            <div class="hero-orbit orbit-two" aria-hidden="true"></div>
+            <div class="hero-content reveal">
+                <p class="eyebrow"><span></span> Una campaña a través del mar astral</p>
+                <h1>Un mismo cielo.<br><span>Un mismo destino.</span></h1>
+                <figure class="character-portrait">
+                    <div class="portrait-frame">
+                        <img src="personaje.svg" alt="Silueta de un personaje ante el mar astral" width="320" height="400">
+                    </div>
+                </figure>
+                <p class="hero-quote">“Ahí fuera hay muchos mundos... pero todos comparten el mismo cielo.”</p>
+                <p class="hero-dream">Unámoslos. Ese es mi sueño.</p>
+                <a class="scroll-cue" href="#sesion-cero">
+                    <span>Comenzar la travesía</span>
+                    <span aria-hidden="true">↓</span>
+                </a>
             </div>
-
         </section>
 
-
-        <section id="sesion_cero" class="seccion">
-
-            <h2>Sesión cero</h2>
-
-            <p>
-                Firma tu contrato pirata
-            </p>
-
-            <a
-                href="#sesion_cero"
-                class="boton"
-            >
-                Ver contrato pirata
-            </a>
-
-        </section>
-
-
-        <section id="reglas" class="seccion">
-
-            <h2>Reglas caseras</h2>
-
-            <div class="reglas-grid">
-
-                <article class="reglas">
-
-                    <h3>Reglas de combate</h3>
-                    <button class="boton">
-                        Ver reglas
-                    </button>
-
-                </article>
-
-
-                 <article class="reglas">
-
-                    <h3>Reglas de exploración</h3>
-
-                    <button class="boton">
-                        Ver reglas
-                    </button>
-
-                </article>
-
-                 <article class="reglas">
-
-                    <h3>Reglas sociales</h3>
-
-                    <button class="boton">
-                        Ver reglas
-                    </button>
-
+        <section id="sesion-cero" class="section-shell reveal">
+            <div class="section-heading">
+                <p class="section-kicker">01 · Antes de zarpar</p>
+                <h2>Sesión cero</h2>
             </div>
-
+            <div class="feature-card">
+                <div class="feature-copy">
+                    <p class="card-label">El pacto de la tripulación</p>
+                    <h3>Firma tu contrato pirata</h3>
+                    <p>Definid juntos el tono de la aventura, los límites de la mesa y aquello que vuestra tripulación promete proteger.</p>
+                    <a href="contrato.html" class="boton">
+                        <span>Ver contrato pirata</span>
+                        <span aria-hidden="true">↗</span>
+                    </a>
+                </div>
+                <div class="astral-compass" aria-hidden="true"><span>✦</span></div>
+            </div>
         </section>
 
-
-        <section id="cronicas" class="seccion">
-
-            <h2>Crónicas</h2>
-
-            <p>
-                Cronicas de la partida.
-            </p>
-
-            <a
-                class="boton"
-            >
-                Ver crónicas
-            </a>
-
+        <section id="reglas" class="section-shell reveal">
+            <div class="section-heading section-heading-split">
+                <div>
+                    <p class="section-kicker">02 · Cartas de navegación</p>
+                    <h2>Reglas caseras</h2>
+                </div>
+                <p>Todo viaje necesita un rumbo. Estas reglas mantienen la aventura ágil, peligrosa y llena de decisiones.</p>
+            </div>
+            <div class="rules-grid">
+                <article class="rule-card">
+                    <span class="rule-number">I</span>
+                    <div class="rule-icon" aria-hidden="true">⚔</div>
+                    <h3>Combate</h3>
+                    <p>Iniciativa, heridas, acciones heroicas y el precio de tentar al destino.</p>
+                    <a href="combate.html" class="boton boton-secundario">
+                        <span>Ver reglas</span><span aria-hidden="true">→</span>
+                    </a>
+                </article>
+                <article class="rule-card">
+                    <span class="rule-number">II</span>
+                    <div class="rule-icon" aria-hidden="true">⌖</div>
+                    <h3>Exploración</h3>
+                    <p>Rutas imposibles, recursos escasos y maravillas ocultas más allá del mapa.</p>
+                    <a href="exploracion.html" class="boton boton-secundario">
+                        <span>Ver reglas</span><span aria-hidden="true">→</span>
+                    </a>
+                </article>
+                <article class="rule-card">
+                    <span class="rule-number">III</span>
+                    <div class="rule-icon" aria-hidden="true">♢</div>
+                    <h3>Encuentros sociales</h3>
+                    <p>Reputación, vínculos, promesas y las consecuencias de cada palabra.</p>
+                    <a href="sociales.html" class="boton boton-secundario">
+                        <span>Ver reglas</span><span aria-hidden="true">→</span>
+                    </a>
+                </article>
+            </div>
         </section>
 
+        <section id="cronicas" class="section-shell reveal">
+            <div class="chronicle-card">
+                <div>
+                    <p class="section-kicker">03 · Estelas en el firmamento</p>
+                    <h2>Crónicas</h2>
+                    <p>Cada decisión deja una marca en el cielo. Conserva aquí las hazañas, pérdidas y descubrimientos de la tripulación.</p>
+                </div>
+                <a href="cronicas.html" class="boton">
+                    <span>Leer las crónicas</span><span aria-hidden="true">↗</span>
+                </a>
+            </div>
+        </section>
     </main>
 
-
     <footer>
-
-        <p>
-            © 202X Mistelar
-        </p>
-
+        <a href="#presentacion" class="footer-mark" aria-label="Volver al inicio">✦</a>
+        <p>Mistelar · Historias bajo un mismo cielo</p>
+        <p class="footer-meta">© <span data-year>2026</span> · Que las estrellas guíen vuestro rumbo</p>
     </footer>
-
-
     <script src="script.js"></script>
-
 </body>
-
 </html>
