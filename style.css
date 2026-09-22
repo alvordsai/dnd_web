@@ -1,0 +1,283 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    background: #f5f7fa;
+
+    color: #222;
+}
+
+
+/* ---------------- */
+/* Navegación       */
+/* ---------------- */
+
+header {
+    background: white;
+
+    border-bottom: 1px solid #ddd;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
+}
+
+
+.navbar {
+    max-width: 1000px;
+
+    margin: auto;
+
+    padding: 20px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+
+.logo {
+    font-size: 24px;
+
+    font-weight: bold;
+
+    text-decoration: none;
+
+    color: #222;
+}
+
+
+.nav-links {
+    display: flex;
+
+    gap: 25px;
+}
+
+
+.nav-links a {
+    text-decoration: none;
+
+    color: #555;
+}
+
+
+.nav-links a:hover {
+    color: #000;
+}
+
+
+/* ---------------- */
+/* Hero             */
+/* ---------------- */
+
+.hero {
+    min-height: 80vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 40px 20px;
+}
+
+
+.hero-content {
+    max-width: 700px;
+}
+
+
+.presentacion {
+    font-size: 20px;
+
+    margin-bottom: 10px;
+}
+
+
+.hero h1 {
+    font-size: 64px;
+
+    margin: 0;
+}
+
+
+.hero h2 {
+    font-size: 30px;
+
+    margin-top: 10px;
+}
+
+
+.descripcion {
+    font-size: 18px;
+
+    line-height: 1.6;
+
+    margin-bottom: 30px;
+}
+
+
+/* ---------------- */
+/* Botones          */
+/* ---------------- */
+
+.boton {
+    display: inline-block;
+
+    padding: 14px 28px;
+
+    background: #222;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    transition: 0.2s;
+}
+
+
+.boton:hover {
+    transform: translateY(-2px);
+
+    opacity: 0.85;
+}
+
+
+/* ---------------- */
+/* Secciones        */
+/* ---------------- */
+
+.seccion {
+    max-width: 1000px;
+
+    margin: auto;
+
+    padding: 100px 20px;
+}
+
+
+.seccion h2 {
+    font-size: 36px;
+
+    margin-bottom: 30px;
+}
+
+
+.seccion p {
+    font-size: 18px;
+
+    line-height: 1.7;
+}
+
+
+/* ---------------- */
+/* Proyectos        */
+/* ---------------- */
+
+.proyectos-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+
+.proyecto {
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 12px;
+
+    border: 1px solid #ddd;
+}
+
+
+.proyecto h3 {
+    margin-top: 0;
+}
+
+
+.boton-proyecto {
+    border: none;
+
+    padding: 10px 18px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+}
+
+
+/* ---------------- */
+/* Footer           */
+/* ---------------- */
+
+footer {
+    text-align: center;
+
+    padding: 30px;
+
+    background: #222;
+
+    color: white;
+}
+
+
+/* ---------------- */
+/* Móviles          */
+/* ---------------- */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+
+    .nav-links {
+        gap: 12px;
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+
+    .hero h1 {
+        font-size: 48px;
+    }
+
+
+    .hero h2 {
+        font-size: 24px;
+    }
+
+
+    .proyectos-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
