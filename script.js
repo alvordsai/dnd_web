@@ -141,13 +141,13 @@
         const playing = !audio.paused;
         toggle.setAttribute("aria-pressed", String(playing));
         toggle.textContent = playing ? "Pausar" : "Reproducir";
-        status.textContent = playing ? "Reproduciendo Dawntrail" : "Música en pausa.";
+        status.textContent = playing ? "Reproduciendo" : "Música en pausa.";
     };
 
     syncVolume();
     toggle.disabled = false;
     volume.disabled = false;
-    status.textContent = "Dawntrail · LoFi · Desplázate para iniciar";
+    status.textContent = "Pulsa Reproducir para escuchar la música.";
 
     let scrollStartPending = false;
     let scrollStartDone = false;
