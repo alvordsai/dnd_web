@@ -147,7 +147,36 @@
     syncVolume();
     toggle.disabled = false;
     volume.disabled = false;
-    status.textContent = "Dawntrail · LoFi";
+    status.textContent = "Dawntrail · LoFi · Desplázate para iniciar";
+
+    let scrollStartPending = false;
+    let scrollStartDone = false;
+
+    const removeScrollStartListeners = () => {
+        window.removeEventListener("scroll", startOnScroll);
+        window.removeEventListener("wheel", startOnScroll);
+        window.removeEventListener("touchmove", startOnScroll);
+    };
+
+    const startOnScroll = async () => {
+        if (scrollStartDone || scrollStartPending || !audio.paused) return;
+
+        scrollStartPending = true;
+        try {
+            await audio.play();
+            scrollStartDone = true;
+            removeScrollStartListeners();
+            syncPlayingState();
+        } catch (_) {
+            status.textContent = "El navegador bloqueó el inicio automático. Pulsa Reproducir.";
+        } finally {
+            scrollStartPending = false;
+        }
+    };
+
+    window.addEventListener("scroll", startOnScroll, { passive: true });
+    window.addEventListener("wheel", startOnScroll, { passive: true });
+    window.addEventListener("touchmove", startOnScroll, { passive: true });
 
     toggle.addEventListener("click", async () => {
         toggle.disabled = true;
@@ -179,5 +208,8 @@
         status.textContent = "No se pudo cargar Dawntrail.";
     });
 
-    window.addEventListener("pagehide", () => audio.pause());
+    window.addEventListener("pagehide", () => {
+        removeScrollStartListeners();
+        audio.pause();
+    });
 })();
