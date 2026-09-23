@@ -1,6 +1,7 @@
 ---
 title: Nombre del personaje
 order: 1
+character_type: pnj # Usa "pj" para personajes jugadores y "pnj" para no jugadores
 role: Aliado, rival o viajero
 portrait: /personaje.svg
 portrait_alt: Retrato provisional del personaje
