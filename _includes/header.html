@@ -15,13 +15,14 @@
             {% if page.homepage %}
                 <a href="#presentacion">Presentación</a>
                 <a href="#sesion-cero">Sesión cero</a>
+                <a href="#tripulacion">Tripulación</a>
                 <a href="#reglas">Reglas</a>
                 <a href="#cronicas">Crónicas</a>
             {% else %}
-                <a href="{{ '/contrato.html' | relative_url }}"{% if page.section == 'contrato' %} aria-current="page"{% endif %}>Contrato</a>
-                <a href="{{ '/combate.html' | relative_url }}"{% if page.section == 'combate' %} aria-current="page"{% endif %}>Combate</a>
-                <a href="{{ '/exploracion.html' | relative_url }}"{% if page.section == 'exploracion' %} aria-current="page"{% endif %}>Exploración</a>
-                <a href="{{ '/sociales.html' | relative_url }}"{% if page.section == 'sociales' %} aria-current="page"{% endif %}>Social</a>
+                <a href="{{ '/nave.html' | relative_url }}"{% if page.section == 'nave' %} aria-current="page"{% endif %}>Nave</a>
+                <a href="{{ '/personajes.html' | relative_url }}"{% if page.section == 'personajes' %} aria-current="page"{% endif %}>Personajes</a>
+                <a href="{{ '/protagonistas.html' | relative_url }}"{% if page.section == 'protagonistas' %} aria-current="page"{% endif %}>Protagonistas</a>
+                <a href="{{ '/index.html#reglas' | relative_url }}">Reglas</a>
                 <a href="{{ '/cronicas.html' | relative_url }}"{% if page.section == 'cronicas' %} aria-current="page"{% endif %}>Crónicas</a>
             {% endif %}
         </div>

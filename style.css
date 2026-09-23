@@ -592,6 +592,60 @@ button, input, textarea, select { font: inherit; }
 .rule-card p { margin: 0 0 2rem; color: var(--muted); font-size: 0.92rem; }
 .rule-card .boton { margin-top: auto; }
 
+.campaign-grid .rule-card:nth-child(1)::before { background: rgba(124, 231, 230, 0.16); }
+.campaign-grid .rule-card:nth-child(2)::before { background: rgba(87, 139, 211, 0.18); }
+.campaign-grid .rule-card:nth-child(3)::before { background: rgba(182, 147, 255, 0.18); }
+
+/* Markdown content pages */
+.markdown-page main {
+    width: min(calc(100% - 40px), 920px);
+    margin: 0 auto;
+    padding: 11rem 0 4rem;
+}
+
+.markdown-page main > h1 {
+    margin: 0 0 1.5rem;
+    font-family: var(--serif);
+    font-size: clamp(4rem, 9vw, 7.5rem);
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    line-height: 0.92;
+}
+
+.markdown-page main > h1 + blockquote {
+    margin: 0 0 4rem;
+    padding: 0 0 0 1.4rem;
+    border-left: 2px solid var(--aqua);
+    color: #bfd2e2;
+    font-family: var(--serif);
+    font-size: clamp(1.2rem, 2.4vw, 1.65rem);
+}
+
+.markdown-page main > h2 {
+    margin: 3.2rem 0 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1;
+}
+
+.markdown-page main > h3 {
+    margin: 2rem 0 0.6rem;
+    color: var(--aqua);
+    font-family: var(--serif);
+    font-size: 1.65rem;
+    font-weight: 600;
+}
+
+.markdown-page main p,
+.markdown-page main li { color: var(--muted); }
+.markdown-page main strong { color: var(--ink); }
+.markdown-page main ul { padding-left: 1.25rem; }
+.markdown-page main li + li { margin-top: 0.55rem; }
+.markdown-page main hr { margin: 3rem 0; border: 0; border-top: 1px solid var(--line); }
+
 /* Chronicles */
 .chronicle-card {
     min-height: 350px;
@@ -752,6 +806,7 @@ footer .footer-meta { color: var(--muted); font-family: var(--sans); font-size: 
     .page-hero::after { opacity: 0.65; }
     .log-entry { grid-template-columns: 1fr; gap: 0.5rem; }
     .music-player { right: 0.7rem; bottom: 0.7rem; width: calc(100% - 1.4rem); }
+    .markdown-page main { width: min(calc(100% - 28px), 920px); padding-top: 9rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
