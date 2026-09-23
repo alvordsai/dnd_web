@@ -1,0 +1,36 @@
+---
+layout: default
+---
+<article class="character-profile">
+    <a class="character-back" href="{{ '/personajes.html' | relative_url }}">
+        <span aria-hidden="true">←</span>
+        Volver a personajes
+    </a>
+
+    <header class="character-profile-hero">
+        <figure class="character-profile-portrait">
+            <img
+                src="{{ page.portrait | default: '/personaje.svg' | relative_url }}"
+                alt="{{ page.portrait_alt | default: page.title | escape }}"
+                width="640"
+                height="800"
+            >
+        </figure>
+
+        <div class="character-profile-intro">
+            {% if page.role %}<p class="section-kicker">{{ page.role }}</p>{% endif %}
+            <h1>{{ page.title }}</h1>
+            {% if page.summary %}<p class="character-summary">{{ page.summary }}</p>{% endif %}
+
+            <dl class="character-facts">
+                {% if page.origin %}<div><dt>Origen</dt><dd>{{ page.origin }}</dd></div>{% endif %}
+                {% if page.status %}<div><dt>Estado</dt><dd>{{ page.status }}</dd></div>{% endif %}
+                {% if page.last_seen %}<div><dt>Última localización</dt><dd>{{ page.last_seen }}</dd></div>{% endif %}
+            </dl>
+        </div>
+    </header>
+
+    <div class="character-profile-content content-panel">
+        {{ content }}
+    </div>
+</article>
