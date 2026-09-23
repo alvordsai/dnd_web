@@ -70,14 +70,40 @@ footer_text: Mistelar · Historias bajo un mismo cielo
         </div>
         <p>Aliados, rivales y figuras memorables encontradas en los distintos mundos del mar astral.</p>
     </div>
+
+    {% assign character_list = site.personajes | sort: "order" %}
+    {% if character_list.size > 0 %}
+    <div class="character-grid">
+        {% for personaje in character_list %}
+        {% assign portrait = personaje.portrait | default: '/personaje.svg' %}
+        <a class="character-card" href="{{ personaje.url | relative_url }}" aria-label="Ver la ficha de {{ personaje.title | escape }}">
+            <span class="character-card-portrait">
+                <img
+                    src="{{ portrait | relative_url }}"
+                    alt="{{ personaje.portrait_alt | default: personaje.title | escape }}"
+                    width="480"
+                    height="600"
+                    loading="lazy"
+                >
+            </span>
+            <span class="character-card-copy">
+                <span class="character-card-role">{{ personaje.role | default: 'Personaje' }}</span>
+                <strong>{{ personaje.title }}</strong>
+                {% if personaje.summary %}<span>{{ personaje.summary }}</span>{% endif %}
+                <span class="character-card-link">Abrir ficha <span aria-hidden="true">→</span></span>
+            </span>
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
     <div class="chronicle-card section-card">
         <div>
-            <p class="card-label">Encuentros y relaciones</p>
-            <h3>¿A quién habéis conocido?</h3>
-            <p>Revisa sus motivaciones, su relación con la tripulación y el último lugar en el que fueron vistos.</p>
+            <p class="card-label">Rostros aún por descubrir</p>
+            <h3>Todavía no hay personajes registrados</h3>
+            <p>Añade un archivo Markdown dentro de <code>_personajes</code> y aparecerá aquí automáticamente.</p>
         </div>
-        <a href="{{ '/personajes.html' | relative_url }}" class="boton"><span>Ver personajes</span><span aria-hidden="true">↗</span></a>
     </div>
+    {% endif %}
 </section>
 
 <section id="protagonistas" class="section-shell reveal">
