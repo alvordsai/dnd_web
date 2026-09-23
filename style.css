@@ -655,6 +655,55 @@ button, input, textarea, select { font: inherit; }
 .markdown-page main li + li { margin-top: 0.55rem; }
 .markdown-page main hr { margin: 3rem 0; border: 0; border-top: 1px solid var(--line); }
 
+/* Character subsections */
+.character-subsection {
+    padding: 2.25rem 0 1rem;
+    scroll-margin-top: 90px;
+}
+
+.character-subsection + .character-subsection {
+    margin-top: 2.5rem;
+    padding-top: 4.5rem;
+    border-top: 1px solid var(--line);
+}
+
+.character-subsection-heading {
+    display: grid;
+    grid-template-columns: 1fr minmax(260px, 0.7fr);
+    align-items: end;
+    gap: 2rem;
+    margin-bottom: 1.75rem;
+}
+
+.character-subsection-heading h3,
+.markdown-page .character-subsection-heading h2 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 5vw, 4.25rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1;
+}
+
+.character-subsection-heading > p {
+    max-width: 520px;
+    margin: 0 0 0.25rem;
+    color: var(--muted);
+}
+
+.character-empty {
+    margin: 0 0 3rem;
+    padding: 1.25rem 1.4rem;
+    border: 1px dashed var(--line);
+    border-radius: 1rem;
+    color: var(--muted);
+    background: rgba(8, 23, 43, 0.42);
+}
+
+.character-empty p { margin: 0; }
+
 /* Character gallery */
 .character-grid {
     display: grid;
@@ -980,7 +1029,7 @@ footer .footer-meta { color: var(--muted); font-family: var(--sans); font-size: 
     .feature-card { gap: 3rem; }
     .feature-card-reverse .feature-copy, .feature-card-reverse .section-emblem { order: initial; }
     .astral-compass { width: min(68vw, 270px); }
-    .section-heading-split { grid-template-columns: 1fr; gap: 1rem; }
+    .section-heading-split, .character-subsection-heading { grid-template-columns: 1fr; gap: 1rem; }
     .chronicle-card { align-items: flex-start; flex-direction: column; }
     .side-note { position: static; }
     .character-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
