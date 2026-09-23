@@ -68,67 +68,36 @@ footer_text: Mistelar · Historias bajo un mismo cielo
             <p class="section-kicker">03 · Rostros del firmamento</p>
             <h2>Personajes</h2>
         </div>
-        <p>Aliados, rivales y figuras memorables encontradas en los distintos mundos del mar astral.</p>
+        <p>La tripulación protagonista y los aliados, rivales y habitantes que encuentra a través del mar astral.</p>
     </div>
 
-    {% assign character_list = site.personajes | sort: "order" %}
-    {% if character_list.size > 0 %}
-    <div class="character-grid">
-        {% for personaje in character_list %}
-        {% assign portrait = personaje.portrait | default: '/personaje.svg' %}
-        <a class="character-card" href="{{ personaje.url | relative_url }}" aria-label="Ver la ficha de {{ personaje.title | escape }}">
-            <span class="character-card-portrait">
-                <img
-                    src="{{ portrait | relative_url }}"
-                    alt="{{ personaje.portrait_alt | default: personaje.title | escape }}"
-                    width="480"
-                    height="600"
-                    loading="lazy"
-                >
-            </span>
-            <span class="character-card-copy">
-                <span class="character-card-role">{{ personaje.role | default: 'Personaje' }}</span>
-                <strong>{{ personaje.title }}</strong>
-                {% if personaje.summary %}<span>{{ personaje.summary }}</span>{% endif %}
-                <span class="character-card-link">Abrir ficha <span aria-hidden="true">→</span></span>
-            </span>
-        </a>
-        {% endfor %}
-    </div>
-    {% else %}
-    <div class="chronicle-card section-card">
-        <div>
-            <p class="card-label">Rostros aún por descubrir</p>
-            <h3>Todavía no hay personajes registrados</h3>
-            <p>Añade un archivo Markdown dentro de <code>_personajes</code> y aparecerá aquí automáticamente.</p>
+    <section id="pjs" class="character-subsection" aria-labelledby="pjs-title">
+        <div class="character-subsection-heading">
+            <div>
+                <p class="card-label">Personajes jugadores</p>
+                <h3 id="pjs-title">PJ</h3>
+            </div>
+            <p>Los aventureros que conducen la historia y forman la tripulación principal.</p>
         </div>
-    </div>
-    {% endif %}
-</section>
+        {% include character-grid.html type="pj" empty_text="Todavía no hay PJ registrados. Añade una ficha en _personajes con character_type: pj." %}
+    </section>
 
-<section id="protagonistas" class="section-shell reveal">
-    <div class="section-heading section-heading-split">
-        <div>
-            <p class="section-kicker">04 · Un mismo destino</p>
-            <h2>Protagonistas</h2>
+    <section id="pnjs" class="character-subsection" aria-labelledby="pnjs-title">
+        <div class="character-subsection-heading">
+            <div>
+                <p class="card-label">Personajes no jugadores</p>
+                <h3 id="pnjs-title">PNJ</h3>
+            </div>
+            <p>Aliados, rivales y figuras memorables encontradas durante la travesía.</p>
         </div>
-        <p>Los aventureros que conducen la historia: sus orígenes, objetivos, vínculos y momentos decisivos.</p>
-    </div>
-    <div class="feature-card feature-card-reverse">
-        <div class="feature-copy">
-            <p class="card-label">La tripulación principal</p>
-            <h3>Conoce a los héroes</h3>
-            <p>Descubre quiénes son, qué buscan en las estrellas y qué promesas los mantienen unidos durante el viaje.</p>
-            <a href="{{ '/protagonistas.html' | relative_url }}" class="boton"><span>Conocer al grupo</span><span aria-hidden="true">↗</span></a>
-        </div>
-        <div class="astral-compass section-emblem" aria-hidden="true"><span>✦</span></div>
-    </div>
+        {% include character-grid.html type="pnj" empty_text="Todavía no hay PNJ registrados. Las fichas sin character_type se consideran PNJ." %}
+    </section>
 </section>
 
 <section id="reglas" class="section-shell reveal">
     <div class="section-heading section-heading-split">
         <div>
-            <p class="section-kicker">05 · Cartas de navegación</p>
+            <p class="section-kicker">04 · Cartas de navegación</p>
             <h2>Reglas caseras</h2>
         </div>
         <p>Todo viaje necesita un rumbo. Estas reglas mantienen la aventura ágil, peligrosa y llena de decisiones.</p>
@@ -155,7 +124,7 @@ footer_text: Mistelar · Historias bajo un mismo cielo
 <section id="cronicas" class="section-shell reveal">
     <div class="chronicle-card">
         <div>
-            <p class="section-kicker">06 · Estelas en el firmamento</p>
+            <p class="section-kicker">05 · Estelas en el firmamento</p>
             <h2>Crónicas</h2>
             <p>Cada decisión deja una marca en el cielo. Conserva aquí las hazañas, pérdidas y descubrimientos de la tripulación.</p>
         </div>
