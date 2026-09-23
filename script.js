@@ -126,6 +126,11 @@
     const audio = document.querySelector("#background-music");
     if (!toggle || !volume || !status || !audio) return;
 
+    const FADE_DURATION = 1500;
+    let fadeFrame = 0;
+    let scrollStartPending = false;
+    let scrollStartDone = false;
+
     try {
         const saved = localStorage.getItem("mistelar-music-volume");
         if (saved !== null && Number.isFinite(Number(saved))) {
@@ -133,24 +138,41 @@
         }
     } catch (_) { /* Music still works when storage is unavailable. */ }
 
-    const syncVolume = () => {
-        audio.volume = Number(volume.value) / 100;
+    const targetVolume = () => Number(volume.value) / 100;
+
+    const cancelFade = () => {
+        if (fadeFrame) cancelAnimationFrame(fadeFrame);
+        fadeFrame = 0;
     };
+
+    const fadeTo = (target, duration = FADE_DURATION) => new Promise((resolve) => {
+        cancelFade();
+
+        const from = audio.volume;
+        const startedAt = performance.now();
+
+        const step = (now) => {
+            const progress = Math.min(1, (now - startedAt) / duration);
+            const eased = progress * (2 - progress);
+            audio.volume = Math.max(0, Math.min(1, from + (target - from) * eased));
+
+            if (progress < 1) {
+                fadeFrame = requestAnimationFrame(step);
+            } else {
+                fadeFrame = 0;
+                resolve();
+            }
+        };
+
+        fadeFrame = requestAnimationFrame(step);
+    });
 
     const syncPlayingState = () => {
         const playing = !audio.paused;
         toggle.setAttribute("aria-pressed", String(playing));
         toggle.textContent = playing ? "Pausar" : "Reproducir";
-        status.textContent = playing ? "Reproduciendo" : "Música en pausa.";
+        status.textContent = playing ? "Reproduciendo Dawntrail" : "Música en pausa.";
     };
-
-    syncVolume();
-    toggle.disabled = false;
-    volume.disabled = false;
-    status.textContent = "Pulsa Reproducir para escuchar la música.";
-
-    let scrollStartPending = false;
-    let scrollStartDone = false;
 
     const removeStartListeners = () => {
         window.removeEventListener("scroll", startOnScroll);
@@ -159,15 +181,29 @@
         document.removeEventListener("click", startOnFirstClick);
     };
 
+    const fadeInAndPlay = async () => {
+        cancelFade();
+        audio.volume = 0;
+        await audio.play();
+        syncPlayingState();
+        await fadeTo(targetVolume());
+    };
+
+    const fadeOutAndPause = async () => {
+        if (audio.paused) return;
+        await fadeTo(0);
+        audio.pause();
+        syncPlayingState();
+    };
+
     const startAudioFromInteraction = async () => {
         if (scrollStartDone || scrollStartPending || !audio.paused) return;
 
         scrollStartPending = true;
         try {
-            await audio.play();
+            await fadeInAndPlay();
             scrollStartDone = true;
             removeStartListeners();
-            syncPlayingState();
         } catch (_) {
             status.textContent = "El navegador bloqueó el inicio automático. Pulsa Reproducir.";
         } finally {
@@ -184,6 +220,11 @@
         await startAudioFromInteraction();
     };
 
+    audio.volume = 0;
+    toggle.disabled = false;
+    volume.disabled = false;
+    status.textContent = "Dawntrail · LoFi · Interactúa para iniciar";
+
     window.addEventListener("scroll", startOnScroll, { passive: true });
     window.addEventListener("wheel", startOnScroll, { passive: true });
     window.addEventListener("touchmove", startOnScroll, { passive: true });
@@ -193,11 +234,10 @@
         toggle.disabled = true;
         try {
             if (audio.paused) {
-                await audio.play();
+                await fadeInAndPlay();
             } else {
-                audio.pause();
+                await fadeOutAndPause();
             }
-            syncPlayingState();
         } catch (_) {
             status.textContent = "No se pudo iniciar la música.";
         } finally {
@@ -206,7 +246,8 @@
     });
 
     volume.addEventListener("input", () => {
-        syncVolume();
+        cancelFade();
+        if (!audio.paused) audio.volume = targetVolume();
         try {
             localStorage.setItem("mistelar-music-volume", volume.value);
         } catch (_) { /* Saving preferences is optional. */ }
@@ -217,14 +258,18 @@
         removeStartListeners();
         syncPlayingState();
     });
+
     audio.addEventListener("pause", syncPlayingState);
+
     audio.addEventListener("error", () => {
+        cancelFade();
         toggle.disabled = true;
         status.textContent = "No se pudo cargar Dawntrail.";
     });
 
     window.addEventListener("pagehide", () => {
         removeStartListeners();
+        cancelFade();
         audio.pause();
     });
 })();
