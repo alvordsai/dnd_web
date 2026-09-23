@@ -592,9 +592,18 @@ button, input, textarea, select { font: inherit; }
 .rule-card p { margin: 0 0 2rem; color: var(--muted); font-size: 0.92rem; }
 .rule-card .boton { margin-top: auto; }
 
-.campaign-grid .rule-card:nth-child(1)::before { background: rgba(124, 231, 230, 0.16); }
-.campaign-grid .rule-card:nth-child(2)::before { background: rgba(87, 139, 211, 0.18); }
-.campaign-grid .rule-card:nth-child(3)::before { background: rgba(182, 147, 255, 0.18); }
+.section-card h3 {
+    margin: 0 0 0.7rem;
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 5vw, 4.6rem);
+    font-weight: 500;
+    line-height: 1;
+}
+
+.section-card > div > p:last-child { max-width: 620px; }
+.feature-card-reverse .feature-copy { order: 2; }
+.feature-card-reverse .section-emblem { order: 1; }
+.section-emblem span { font-size: clamp(3.8rem, 8vw, 6rem); }
 
 /* Markdown content pages */
 .markdown-page main {
@@ -787,6 +796,7 @@ footer .footer-meta { color: var(--muted); font-family: var(--sans); font-size: 
     .nav-links a { font-family: var(--serif); font-size: 2.2rem; letter-spacing: 0.02em; text-transform: none; }
     .rules-grid, .feature-card, .content-grid { grid-template-columns: 1fr; }
     .feature-card { gap: 3rem; }
+    .feature-card-reverse .feature-copy, .feature-card-reverse .section-emblem { order: initial; }
     .astral-compass { width: min(68vw, 270px); }
     .section-heading-split { grid-template-columns: 1fr; gap: 1rem; }
     .chronicle-card { align-items: flex-start; flex-direction: column; }
