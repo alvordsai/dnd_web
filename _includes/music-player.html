@@ -2,11 +2,17 @@
     <div class="music-copy">
         <span aria-hidden="true">♫</span>
         <div>
-            <strong>Tema de Mistelar - LoFi</strong>
+            <strong>Dawntrail · LoFi</strong>
             <p id="music-status" role="status">Activa JavaScript para escuchar la melodía.</p>
         </div>
     </div>
     <button id="music-toggle" type="button" aria-pressed="false" disabled>Reproducir</button>
     <label class="sr-only" for="music-volume">Volumen de la música</label>
     <input id="music-volume" type="range" min="0" max="100" value="30" disabled>
+    <audio
+        id="background-music"
+        src="{{ '/music/Dawntrail_lofi.mp3' | relative_url }}"
+        preload="metadata"
+        loop
+    ></audio>
 </aside>
