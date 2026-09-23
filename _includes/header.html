@@ -17,13 +17,11 @@
                 <a href="#sesion-cero">Contrato</a>
                 <a href="#nave">Nave</a>
                 <a href="#personajes">Personajes</a>
-                <a href="#protagonistas">Protagonistas</a>
                 <a href="#reglas">Reglas</a>
                 <a href="#cronicas">Crónicas</a>
             {% else %}
                 <a href="{{ '/nave.html' | relative_url }}"{% if page.section == 'nave' %} aria-current="page"{% endif %}>Nave</a>
                 <a href="{{ '/personajes.html' | relative_url }}"{% if page.section == 'personajes' %} aria-current="page"{% endif %}>Personajes</a>
-                <a href="{{ '/protagonistas.html' | relative_url }}"{% if page.section == 'protagonistas' %} aria-current="page"{% endif %}>Protagonistas</a>
                 <a href="{{ '/index.html#reglas' | relative_url }}">Reglas</a>
                 <a href="{{ '/cronicas.html' | relative_url }}"{% if page.section == 'cronicas' %} aria-current="page"{% endif %}>Crónicas</a>
             {% endif %}
