@@ -1,0 +1,14 @@
+collections:
+  personajes:
+    output: true
+    permalink: /personajes/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: personajes
+    values:
+      layout: personaje
+      body_class: inner-page character-page
+      section: personajes
+      footer_text: Mistelar · Rostros del firmamento
