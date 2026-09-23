@@ -152,20 +152,21 @@
     let scrollStartPending = false;
     let scrollStartDone = false;
 
-    const removeScrollStartListeners = () => {
+    const removeStartListeners = () => {
         window.removeEventListener("scroll", startOnScroll);
         window.removeEventListener("wheel", startOnScroll);
         window.removeEventListener("touchmove", startOnScroll);
+        document.removeEventListener("click", startOnFirstClick);
     };
 
-    const startOnScroll = async () => {
+    const startAudioFromInteraction = async () => {
         if (scrollStartDone || scrollStartPending || !audio.paused) return;
 
         scrollStartPending = true;
         try {
             await audio.play();
             scrollStartDone = true;
-            removeScrollStartListeners();
+            removeStartListeners();
             syncPlayingState();
         } catch (_) {
             status.textContent = "El navegador bloqueó el inicio automático. Pulsa Reproducir.";
@@ -174,9 +175,19 @@
         }
     };
 
+    const startOnScroll = async () => {
+        await startAudioFromInteraction();
+    };
+
+    const startOnFirstClick = async (event) => {
+        if (event.target.closest(".music-player")) return;
+        await startAudioFromInteraction();
+    };
+
     window.addEventListener("scroll", startOnScroll, { passive: true });
     window.addEventListener("wheel", startOnScroll, { passive: true });
     window.addEventListener("touchmove", startOnScroll, { passive: true });
+    document.addEventListener("click", startOnFirstClick);
 
     toggle.addEventListener("click", async () => {
         toggle.disabled = true;
@@ -201,7 +212,11 @@
         } catch (_) { /* Saving preferences is optional. */ }
     });
 
-    audio.addEventListener("play", syncPlayingState);
+    audio.addEventListener("play", () => {
+        scrollStartDone = true;
+        removeStartListeners();
+        syncPlayingState();
+    });
     audio.addEventListener("pause", syncPlayingState);
     audio.addEventListener("error", () => {
         toggle.disabled = true;
@@ -209,7 +224,7 @@
     });
 
     window.addEventListener("pagehide", () => {
-        removeScrollStartListeners();
+        removeStartListeners();
         audio.pause();
     });
 })();
