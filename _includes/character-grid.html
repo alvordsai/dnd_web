@@ -1,0 +1,44 @@
+{% assign character_list = site.personajes | sort: "order" %}
+{% assign character_count = 0 %}
+
+<div class="character-grid">
+{% for personaje in character_list %}
+    {% assign is_pj = false %}
+    {% if personaje.character_type == "pj" %}{% assign is_pj = true %}{% endif %}
+
+    {% assign show_character = false %}
+    {% if include.type == "pj" and is_pj %}
+        {% assign show_character = true %}
+    {% elsif include.type == "pnj" and is_pj == false %}
+        {% assign show_character = true %}
+    {% endif %}
+
+    {% if show_character %}
+        {% assign character_count = character_count | plus: 1 %}
+        {% assign portrait = personaje.portrait | default: '/personaje.svg' %}
+        <a class="character-card" href="{{ personaje.url | relative_url }}" aria-label="Ver la ficha de {{ personaje.title | escape }}">
+            <span class="character-card-portrait">
+                <img
+                    src="{{ portrait | relative_url }}"
+                    alt="{{ personaje.portrait_alt | default: personaje.title | escape }}"
+                    width="480"
+                    height="600"
+                    loading="lazy"
+                >
+            </span>
+            <span class="character-card-copy">
+                <span class="character-card-role">{{ personaje.role | default: 'Personaje' }}</span>
+                <strong>{{ personaje.title }}</strong>
+                {% if personaje.summary %}<span>{{ personaje.summary }}</span>{% endif %}
+                <span class="character-card-link">Abrir ficha <span aria-hidden="true">→</span></span>
+            </span>
+        </a>
+    {% endif %}
+{% endfor %}
+</div>
+
+{% if character_count == 0 %}
+<div class="character-empty">
+    <p>{{ include.empty_text }}</p>
+</div>
+{% endif %}
