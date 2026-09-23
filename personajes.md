@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Personajes
-description: Aliados, rivales y habitantes del universo de Mistelar.
+description: PJ y PNJ del universo de Mistelar.
 body_class: inner-page markdown-page character-gallery-page
 section: personajes
 footer_text: Mistelar · Rostros del firmamento
@@ -9,30 +9,36 @@ footer_text: Mistelar · Rostros del firmamento
 
 # Personajes
 
-> Un registro de aliados, rivales y figuras memorables. Selecciona un retrato para consultar su historia y relación con la tripulación.
+> La tripulación protagonista y los personajes que encuentra durante su viaje. Cada retrato abre la ficha individual del personaje.
 
-{% assign character_list = site.personajes | sort: "order" %}
-<div class="character-grid">
-{% for personaje in character_list %}
-    {% assign portrait = personaje.portrait | default: '/personaje.svg' %}
-    <a class="character-card" href="{{ personaje.url | relative_url }}" aria-label="Ver la ficha de {{ personaje.title | escape }}">
-        <span class="character-card-portrait">
-            <img
-                src="{{ portrait | relative_url }}"
-                alt="{{ personaje.portrait_alt | default: personaje.title | escape }}"
-                width="480"
-                height="600"
-                loading="lazy"
-            >
-        </span>
-        <span class="character-card-copy">
-            <span class="character-card-role">{{ personaje.role | default: 'Personaje' }}</span>
-            <strong>{{ personaje.title }}</strong>
-            {% if personaje.summary %}<span>{{ personaje.summary }}</span>{% endif %}
-            <span class="character-card-link">Abrir ficha <span aria-hidden="true">→</span></span>
-        </span>
-    </a>
-{% endfor %}
+<section id="pjs" class="character-subsection character-subsection-page" aria-labelledby="pjs-title">
+<div class="character-subsection-heading">
+<div>
+
+<p class="card-label">Personajes jugadores</p>
+
+## PJ {#pjs-title}
+
+</div>
+<p>Los aventureros controlados por los jugadores y protagonistas de la campaña.</p>
 </div>
 
-Cada personaje se guarda como un archivo Markdown independiente dentro de `_personajes`. Para añadir otro, duplica la ficha de ejemplo y cambia sus datos.
+{% include character-grid.html type="pj" empty_text="Todavía no hay PJ registrados. Añade una ficha en _personajes con character_type: pj." %}
+</section>
+
+<section id="pnjs" class="character-subsection character-subsection-page" aria-labelledby="pnjs-title">
+<div class="character-subsection-heading">
+<div>
+
+<p class="card-label">Personajes no jugadores</p>
+
+## PNJ {#pnjs-title}
+
+</div>
+<p>Aliados, rivales, contactos y habitantes del universo controlados por el director de juego.</p>
+</div>
+
+{% include character-grid.html type="pnj" empty_text="Todavía no hay PNJ registrados. Las fichas sin character_type se consideran PNJ." %}
+</section>
+
+Para añadir un personaje, crea un Markdown dentro de `_personajes`. Usa `character_type: pj` para un PJ o `character_type: pnj` para un PNJ. Si omites el campo, se tratará como PNJ.
