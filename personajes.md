@@ -17,7 +17,7 @@ footer_text: Mistelar · Rostros del firmamento
 
 <p class="card-label">Personajes jugadores</p>
 
-## PJ {#pjs-title}
+<h2 id="pjs-title">PJ</h2>
 
 </div>
 <p>Los aventureros controlados por los jugadores y protagonistas de la campaña.</p>
@@ -32,7 +32,7 @@ footer_text: Mistelar · Rostros del firmamento
 
 <p class="card-label">Personajes no jugadores</p>
 
-## PNJ {#pnjs-title}
+<h2 id="pnjs-title">PNJ</h2>
 
 </div>
 <p>Aliados, rivales, contactos y habitantes del universo controlados por el director de juego.</p>
