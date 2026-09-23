@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ page.description | default: 'Mistelar: historias bajo un mismo cielo.' }}">
+    <meta name="theme-color" content="#050817">
+    <title>{% if page.homepage %}{{ page.title }}{% else %}{{ page.title }} · Mistelar{% endif %}</title>
+    <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+</head>
+<body{% if page.body_class %} class="{{ page.body_class }}"{% endif %}>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <canvas class="starfield" aria-hidden="true"></canvas>
+
+    {% include header.html %}
+    {% if page.music_player %}{% include music-player.html %}{% endif %}
+
+    <main id="contenido">
+        {{ content }}
+    </main>
+
+    {% include footer.html %}
+    <script src="{{ '/script.js' | relative_url }}"></script>
+</body>
+</html>

@@ -1,35 +1,26 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Reglas caseras de combate para la campaña Mistelar.">
-    <meta name="theme-color" content="#050817">
-    <title>Reglas de combate · Mistelar</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="inner-page">
-    <a class="skip-link" href="#contenido">Saltar al contenido</a><canvas class="starfield" aria-hidden="true"></canvas>
-    <header class="site-header"><nav class="navbar" aria-label="Navegación principal">
-        <a href="index.html" class="logo"><span class="logo-mark" aria-hidden="true">✦</span><span>Mistelar</span></a>
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links"><span class="sr-only">Abrir menú</span><span aria-hidden="true"></span><span aria-hidden="true"></span></button>
-        <div class="nav-links" id="nav-links"><a href="contrato.html">Contrato</a><a href="combate.html" aria-current="page">Combate</a><a href="exploracion.html">Exploración</a><a href="sociales.html">Social</a><a href="cronicas.html">Crónicas</a></div>
-    </nav></header>
-    <main id="contenido">
-        <section class="page-hero reveal" data-symbol="⚔"><div class="page-hero-content">
-            <p class="section-kicker">Reglas caseras · I</p><h1>Combate</h1>
-            <p class="lead">Cuando las palabras ya no bastan, cada segundo pesa. El peligro debe sentirse rápido, claro y lleno de elecciones.</p>
-        </div></section>
-        <section class="section-shell content-grid reveal">
-            <aside class="side-note"><span class="rule-pill">Borrador de reglas</span><h2>Antes de jugar</h2><p>Estos bloques son una estructura lista para sustituir por las reglas definitivas de tu mesa.</p><a href="index.html#reglas" class="boton"><span>Volver a reglas</span><span aria-hidden="true">←</span></a></aside>
-            <div class="content-stack">
-                <article class="content-panel"><span class="rule-pill">01 · Iniciativa</span><h2>Actuar bajo presión</h2><p>Al comenzar un enfrentamiento, establece el orden una sola vez. Las acciones se resuelven con rapidez y el foco cambia cuando la ficción lo exige.</p><p class="placeholder-note">Define aquí el método exacto de iniciativa y cómo se rompen los empates.</p></article>
-                <article class="content-panel"><span class="rule-pill">02 · Impulso</span><h2>Tentar al destino</h2><p>Las decisiones audaces pueden otorgar impulso. Gástalo para mejorar una tirada, proteger a un aliado o introducir una ventaja coherente con la escena.</p><p class="placeholder-note">Anota el límite de impulso, cuándo se recupera y cuánto cuesta cada uso.</p></article>
-                <article class="content-panel"><span class="rule-pill">03 · Heridas</span><h2>El precio del combate</h2><p>Una herida importante cambia la ficción, no solo una cifra. Describe la consecuencia y deja claro qué hace falta para recuperarse.</p><p class="placeholder-note">Añade aquí los niveles de herida y sus efectos mecánicos.</p></article>
-            </div>
-        </section>
-    </main>
-    <footer><a href="index.html" class="footer-mark" aria-label="Volver al inicio">✦</a><p>Mistelar · Cartas de combate</p><p class="footer-meta">© <span data-year>2026</span> · Bajo un mismo cielo</p></footer>
-    <script src="script.js"></script>
-</body>
-</html>
+---
+layout: default
+title: Reglas de combate
+description: Reglas caseras de combate para la campaña Mistelar.
+body_class: inner-page
+section: combate
+footer_text: Mistelar · Cartas de combate
+---
+<section class="page-hero reveal" data-symbol="⚔">
+    <div class="page-hero-content">
+        <p class="section-kicker">Reglas caseras · I</p><h1>Combate</h1>
+        <p class="lead">Cuando las palabras ya no bastan, cada segundo pesa. El peligro debe sentirse rápido, claro y lleno de elecciones.</p>
+    </div>
+</section>
+<section class="section-shell content-grid reveal">
+    <aside class="side-note">
+        <span class="rule-pill">Borrador de reglas</span><h2>Antes de jugar</h2>
+        <p>Estos bloques son una estructura lista para sustituir por las reglas definitivas de tu mesa.</p>
+        <a href="{{ '/index.html#reglas' | relative_url }}" class="boton"><span>Volver a reglas</span><span aria-hidden="true">←</span></a>
+    </aside>
+    <div class="content-stack">
+        <article class="content-panel"><span class="rule-pill">01 · Iniciativa</span><h2>Actuar bajo presión</h2><p>Al comenzar un enfrentamiento, establece el orden una sola vez. Las acciones se resuelven con rapidez y el foco cambia cuando la ficción lo exige.</p><p class="placeholder-note">Define aquí el método exacto de iniciativa y cómo se rompen los empates.</p></article>
+        <article class="content-panel"><span class="rule-pill">02 · Impulso</span><h2>Tentar al destino</h2><p>Las decisiones audaces pueden otorgar impulso. Gástalo para mejorar una tirada, proteger a un aliado o introducir una ventaja coherente con la escena.</p><p class="placeholder-note">Anota el límite de impulso, cuándo se recupera y cuánto cuesta cada uso.</p></article>
+        <article class="content-panel"><span class="rule-pill">03 · Heridas</span><h2>El precio del combate</h2><p>Una herida importante cambia la ficción, no solo una cifra. Describe la consecuencia y deja claro qué hace falta para recuperarse.</p><p class="placeholder-note">Añade aquí los niveles de herida y sus efectos mecánicos.</p></article>
+    </div>
+</section>

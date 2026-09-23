@@ -1,32 +1,26 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Reglas caseras de exploración para la campaña Mistelar.">
-    <meta name="theme-color" content="#050817">
-    <title>Reglas de exploración · Mistelar</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="inner-page">
-    <a class="skip-link" href="#contenido">Saltar al contenido</a><canvas class="starfield" aria-hidden="true"></canvas>
-    <header class="site-header"><nav class="navbar" aria-label="Navegación principal">
-        <a href="index.html" class="logo"><span class="logo-mark" aria-hidden="true">✦</span><span>Mistelar</span></a>
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links"><span class="sr-only">Abrir menú</span><span aria-hidden="true"></span><span aria-hidden="true"></span></button>
-        <div class="nav-links" id="nav-links"><a href="contrato.html">Contrato</a><a href="combate.html">Combate</a><a href="exploracion.html" aria-current="page">Exploración</a><a href="sociales.html">Social</a><a href="cronicas.html">Crónicas</a></div>
-    </nav></header>
-    <main id="contenido">
-        <section class="page-hero reveal" data-symbol="⌖"><div class="page-hero-content"><p class="section-kicker">Reglas caseras · II</p><h1>Exploración</h1><p class="lead">El mapa termina donde empieza la aventura. Elegir una ruta es decidir qué riesgo aceptar y qué maravilla perseguir.</p></div></section>
-        <section class="section-shell content-grid reveal">
-            <aside class="side-note"><span class="rule-pill">Borrador de reglas</span><h2>La carta astral</h2><p>Usa esta estructura para convertir cada viaje en una decisión, no en un simple salto entre escenas.</p><a href="index.html#reglas" class="boton"><span>Volver a reglas</span><span aria-hidden="true">←</span></a></aside>
-            <div class="content-stack">
-                <article class="content-panel"><span class="rule-pill">01 · Rumbo</span><h2>Elegir la ruta</h2><p>Antes de partir, la tripulación escoge entre la vía segura, la vía rápida o una senda desconocida. Cada opción debe revelar su promesa y parte de su coste.</p><p class="placeholder-note">Añade la dificultad, duración y posibles encuentros de cada tipo de ruta.</p></article>
-                <article class="content-panel"><span class="rule-pill">02 · Recursos</span><h2>Lo que llevamos a bordo</h2><p>Resume provisiones, combustible y repuestos en reservas fáciles de leer. Un contratiempo consume recursos; una preparación brillante evita perderlos.</p><p class="placeholder-note">Define la escala de reservas y cuándo se comprueba su desgaste.</p></article>
-                <article class="content-panel"><span class="rule-pill">03 · Descubrimientos</span><h2>Más allá del horizonte</h2><p>Todo viaje debería cambiar el mapa. Nombra el lugar, registra su peligro y deja una pregunta abierta para la próxima visita.</p><p class="placeholder-note">Incluye aquí tu tabla de hallazgos, presagios o anomalías.</p></article>
-            </div>
-        </section>
-    </main>
-    <footer><a href="index.html" class="footer-mark" aria-label="Volver al inicio">✦</a><p>Mistelar · Cartas de navegación</p><p class="footer-meta">© <span data-year>2026</span> · Bajo un mismo cielo</p></footer>
-    <script src="script.js"></script>
-</body>
-</html>
+---
+layout: default
+title: Reglas de exploración
+description: Reglas caseras de exploración para la campaña Mistelar.
+body_class: inner-page
+section: exploracion
+footer_text: Mistelar · Cartas de navegación
+---
+<section class="page-hero reveal" data-symbol="⌖">
+    <div class="page-hero-content">
+        <p class="section-kicker">Reglas caseras · II</p><h1>Exploración</h1>
+        <p class="lead">El mapa termina donde empieza la aventura. Elegir una ruta es decidir qué riesgo aceptar y qué maravilla perseguir.</p>
+    </div>
+</section>
+<section class="section-shell content-grid reveal">
+    <aside class="side-note">
+        <span class="rule-pill">Borrador de reglas</span><h2>La carta astral</h2>
+        <p>Usa esta estructura para convertir cada viaje en una decisión, no en un simple salto entre escenas.</p>
+        <a href="{{ '/index.html#reglas' | relative_url }}" class="boton"><span>Volver a reglas</span><span aria-hidden="true">←</span></a>
+    </aside>
+    <div class="content-stack">
+        <article class="content-panel"><span class="rule-pill">01 · Rumbo</span><h2>Elegir la ruta</h2><p>Antes de partir, la tripulación escoge entre la vía segura, la vía rápida o una senda desconocida. Cada opción debe revelar su promesa y parte de su coste.</p><p class="placeholder-note">Añade la dificultad, duración y posibles encuentros de cada tipo de ruta.</p></article>
+        <article class="content-panel"><span class="rule-pill">02 · Recursos</span><h2>Lo que llevamos a bordo</h2><p>Resume provisiones, combustible y repuestos en reservas fáciles de leer. Un contratiempo consume recursos; una preparación brillante evita perderlos.</p><p class="placeholder-note">Define la escala de reservas y cuándo se comprueba su desgaste.</p></article>
+        <article class="content-panel"><span class="rule-pill">03 · Descubrimientos</span><h2>Más allá del horizonte</h2><p>Todo viaje debería cambiar el mapa. Nombra el lugar, registra su peligro y deja una pregunta abierta para la próxima visita.</p><p class="placeholder-note">Incluye aquí tu tabla de hallazgos, presagios o anomalías.</p></article>
+    </div>
+</section>

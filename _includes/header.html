@@ -1,0 +1,29 @@
+<header class="site-header">
+    <nav class="navbar" aria-label="Navegación principal">
+        <a href="{% if page.homepage %}#presentacion{% else %}{{ '/index.html' | relative_url }}{% endif %}" class="logo" aria-label="Mistelar, inicio">
+            <span class="logo-mark" aria-hidden="true">✦</span>
+            <span>Mistelar</span>
+        </a>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+            <span class="sr-only">Abrir menú</span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </button>
+
+        <div class="nav-links" id="nav-links">
+            {% if page.homepage %}
+                <a href="#presentacion">Presentación</a>
+                <a href="#sesion-cero">Sesión cero</a>
+                <a href="#reglas">Reglas</a>
+                <a href="#cronicas">Crónicas</a>
+            {% else %}
+                <a href="{{ '/contrato.html' | relative_url }}"{% if page.section == 'contrato' %} aria-current="page"{% endif %}>Contrato</a>
+                <a href="{{ '/combate.html' | relative_url }}"{% if page.section == 'combate' %} aria-current="page"{% endif %}>Combate</a>
+                <a href="{{ '/exploracion.html' | relative_url }}"{% if page.section == 'exploracion' %} aria-current="page"{% endif %}>Exploración</a>
+                <a href="{{ '/sociales.html' | relative_url }}"{% if page.section == 'sociales' %} aria-current="page"{% endif %}>Social</a>
+                <a href="{{ '/cronicas.html' | relative_url }}"{% if page.section == 'cronicas' %} aria-current="page"{% endif %}>Crónicas</a>
+            {% endif %}
+        </div>
+    </nav>
+</header>
