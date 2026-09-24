@@ -126,6 +126,16 @@ button, input, textarea, select { font: inherit; }
     text-decoration: none;
 }
 
+.logo-wordmark {
+    display: block;
+    width: 8.25rem;
+    aspect-ratio: 2012 / 400;
+    flex: 0 0 auto;
+    background: currentColor;
+    -webkit-mask: url("images/mistelar-logo.png") center / contain no-repeat;
+    mask: url("images/mistelar-logo.png") center / contain no-repeat;
+}
+
 .logo-mark {
     display: grid;
     width: 2.1rem;
