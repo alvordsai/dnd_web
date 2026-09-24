@@ -616,6 +616,143 @@ button, input, textarea, select { font: inherit; }
     text-wrap: balance;
 }
 
+/* Contract signatures */
+.contract-signature,
+.contract-signers {
+    margin-top: 1.2rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    background: linear-gradient(145deg, rgba(10, 29, 51, 0.86), rgba(8, 17, 37, 0.92));
+}
+
+.contract-signature {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(320px, 1.15fr);
+    align-items: end;
+    gap: clamp(1.5rem, 5vw, 4rem);
+}
+
+.signature-copy h3,
+.signature-list-heading h3 {
+    margin: 0.25rem 0 0;
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+    font-weight: 500;
+    line-height: 1.08;
+}
+
+.signature-copy > p:last-child {
+    max-width: 48ch;
+    margin: 1rem 0 0;
+    color: var(--muted);
+}
+
+.signature-form label {
+    display: block;
+    margin-bottom: 0.55rem;
+    color: #dcecf4;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+}
+
+.signature-controls {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.75rem;
+}
+
+.signature-controls input {
+    width: 100%;
+    min-width: 0;
+    min-height: 52px;
+    padding: 0.85rem 1.1rem;
+    border: 1px solid rgba(124, 231, 230, 0.28);
+    border-radius: 999px;
+    outline: none;
+    background: rgba(2, 10, 22, 0.72);
+    color: var(--text);
+    font: inherit;
+    transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.signature-controls input::placeholder { color: rgba(184, 205, 218, 0.48); }
+
+.signature-controls input:focus {
+    border-color: var(--aqua);
+    background: rgba(4, 18, 34, 0.9);
+    box-shadow: 0 0 0 3px rgba(124, 231, 230, 0.1), 0 0 2rem rgba(124, 231, 230, 0.1);
+}
+
+.signature-submit {
+    cursor: pointer;
+    font-family: var(--sans);
+}
+
+.signature-feedback {
+    min-height: 1.35rem;
+    margin: 0.7rem 0 0;
+    color: var(--aqua);
+    font-size: 0.82rem;
+}
+
+.signature-storage-note {
+    margin: 0.15rem 0 0;
+    color: var(--muted);
+    font-size: 0.75rem;
+}
+
+.contract-signers {
+    background: rgba(6, 17, 35, 0.58);
+}
+
+.signature-list-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.signature-empty {
+    margin: 1.4rem 0 0;
+    color: var(--muted);
+}
+
+.signature-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.signature-list[hidden] { display: none; }
+
+.signature-list li {
+    position: relative;
+    min-width: 0;
+    padding: 1rem 1rem 1rem 2.4rem;
+    overflow-wrap: anywhere;
+    border: 1px solid rgba(124, 231, 230, 0.18);
+    border-radius: 0.9rem;
+    background: rgba(124, 231, 230, 0.045);
+    color: #eaf8fb;
+    font-family: var(--serif);
+    font-size: 1.1rem;
+}
+
+.signature-list li::before {
+    content: "✦";
+    position: absolute;
+    top: 1.05rem;
+    left: 1rem;
+    color: var(--aqua);
+    font-size: 0.72rem;
+}
+
 /* Rule cards */
 .rules-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
 
@@ -1099,6 +1236,8 @@ footer .footer-meta { color: var(--muted); font-family: var(--sans); font-size: 
     .nav-links.is-open { opacity: 1; pointer-events: auto; transform: translateY(0); }
     .nav-links a { font-family: var(--serif); font-size: 2.2rem; letter-spacing: 0.02em; text-transform: none; }
     .rules-grid, .contract-grid, .feature-card, .content-grid { grid-template-columns: 1fr; }
+    .contract-signature { grid-template-columns: 1fr; align-items: start; }
+    .signature-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .feature-card { gap: 3rem; }
     .feature-card-reverse .feature-copy, .feature-card-reverse .section-emblem { order: initial; }
     .astral-compass { width: min(68vw, 270px); }
@@ -1120,6 +1259,8 @@ footer .footer-meta { color: var(--muted); font-family: var(--sans); font-size: 
     .feature-card, .chronicle-card, .rule-card { border-radius: 1rem; }
     .rule-card { min-height: 390px; }
     .contract-card { min-height: 220px; }
+    .contract-signature, .contract-signers { padding: 1.25rem; }
+    .signature-controls, .signature-list { grid-template-columns: 1fr; }
     .boton { width: 100%; justify-content: space-between; }
     .page-hero { min-height: 58svh; }
     .page-hero::after { opacity: 0.65; }

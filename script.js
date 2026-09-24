@@ -116,6 +116,114 @@
     window.addEventListener("pagehide", () => cancelAnimationFrame(animationFrame), { once: true });
 })();
 
+// Local signatures for the social contract.
+(() => {
+    "use strict";
+
+    const form = document.querySelector("#contract-signature-form");
+    const input = document.querySelector("#signature-name");
+    const feedback = document.querySelector("#signature-feedback");
+    const list = document.querySelector("#signature-list");
+    const emptyState = document.querySelector("#signature-empty");
+    if (!form || !input || !feedback || !list || !emptyState) return;
+
+    const STORAGE_KEY = "mistelar-contract-signatures-v1";
+    let signatures = [];
+
+    const cleanName = (value) => value
+        .replace(/[\u200B-\u200D\uFEFF]/g, "")
+        .replace(/\s+/g, " ")
+        .trim()
+        .slice(0, 60);
+
+    const readSignatures = () => {
+        try {
+            const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+            if (!Array.isArray(stored)) return [];
+
+            const seen = new Set();
+            return stored.reduce((validNames, value) => {
+                if (typeof value !== "string") return validNames;
+
+                const name = cleanName(value);
+                const key = name.toLocaleLowerCase("es");
+                if (!name || seen.has(key)) return validNames;
+
+                seen.add(key);
+                validNames.push(name);
+                return validNames;
+            }, []);
+        } catch (_) {
+            feedback.textContent = "No se pudieron leer las firmas guardadas en este navegador.";
+            return [];
+        }
+    };
+
+    const saveSignatures = (names) => {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(names));
+            return true;
+        } catch (_) {
+            feedback.textContent = "Este navegador no permite guardar la firma.";
+            return false;
+        }
+    };
+
+    const renderSignatures = () => {
+        list.replaceChildren();
+        const hasSignatures = signatures.length > 0;
+        emptyState.hidden = hasSignatures;
+        list.hidden = !hasSignatures;
+
+        const fragment = document.createDocumentFragment();
+        signatures.forEach((name) => {
+            const item = document.createElement("li");
+            item.textContent = name;
+            fragment.appendChild(item);
+        });
+        list.appendChild(fragment);
+    };
+
+    signatures = readSignatures();
+    renderSignatures();
+
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const name = cleanName(input.value);
+
+        if (!name) {
+            feedback.textContent = "Escribe un nombre antes de firmar.";
+            input.focus();
+            return;
+        }
+
+        const alreadySigned = signatures.some(
+            (savedName) => savedName.localeCompare(name, "es", { sensitivity: "accent" }) === 0
+        );
+        if (alreadySigned) {
+            feedback.textContent = `${name} ya ha firmado en este navegador.`;
+            input.select();
+            return;
+        }
+
+        const nextSignatures = [...signatures, name];
+        if (!saveSignatures(nextSignatures)) return;
+
+        signatures = nextSignatures;
+        renderSignatures();
+        form.reset();
+        feedback.textContent = `Firma guardada: ${name}.`;
+        input.focus();
+    });
+
+    window.addEventListener("storage", (event) => {
+        if (event.key !== STORAGE_KEY) return;
+        signatures = readSignatures();
+        renderSignatures();
+        feedback.textContent = "La lista de firmas se ha actualizado.";
+    });
+})();
+
 // Background music player.
 (() => {
     "use strict";
