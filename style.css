@@ -616,24 +616,19 @@ button, input, textarea, select { font: inherit; }
 }
 
 /* Contract signatures */
-.contract-signature,
-.contract-signers {
+.contract-signature {
+    display: grid;
     margin-top: 1.2rem;
     padding: clamp(1.5rem, 4vw, 2.5rem);
     border: 1px solid var(--line);
     border-radius: 1.25rem;
     background: linear-gradient(145deg, rgba(10, 29, 51, 0.86), rgba(8, 17, 37, 0.92));
-}
-
-.contract-signature {
-    display: grid;
     grid-template-columns: minmax(0, 0.85fr) minmax(320px, 1.15fr);
     align-items: end;
     gap: clamp(1.5rem, 5vw, 4rem);
 }
 
-.signature-copy h3,
-.signature-list-heading h3 {
+.signature-copy h3 {
     margin: 0.25rem 0 0;
     font-family: var(--serif);
     font-size: clamp(1.8rem, 3.2vw, 2.6rem);
@@ -703,53 +698,34 @@ button, input, textarea, select { font: inherit; }
     font-size: 0.75rem;
 }
 
-.contract-signers {
-    background: rgba(6, 17, 35, 0.58);
+.signature-form[hidden],
+.signature-signed-state[hidden] {
+    display: none;
 }
 
-.signature-list-heading {
+.signature-signed-state {
+    min-height: 52px;
     display: flex;
-    align-items: end;
-    justify-content: space-between;
-    gap: 1rem;
-}
-
-.signature-empty {
-    margin: 1.4rem 0 0;
-    color: var(--muted);
-}
-
-.signature-list {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: center;
+    justify-content: center;
     gap: 0.75rem;
-    margin: 1.5rem 0 0;
-    padding: 0;
-    list-style: none;
-}
-
-.signature-list[hidden] { display: none; }
-
-.signature-list li {
-    position: relative;
-    min-width: 0;
-    padding: 1rem 1rem 1rem 2.4rem;
-    overflow-wrap: anywhere;
-    border: 1px solid rgba(124, 231, 230, 0.18);
-    border-radius: 0.9rem;
-    background: rgba(124, 231, 230, 0.045);
-    color: #eaf8fb;
+    padding: 0.85rem 1.1rem;
+    border: 1px solid rgba(124, 231, 230, 0.38);
+    border-radius: 999px;
+    background: rgba(124, 231, 230, 0.08);
+    color: #eafcff;
     font-family: var(--serif);
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    box-shadow: inset 0 0 1.8rem rgba(124, 231, 230, 0.06);
 }
 
-.signature-list li::before {
-    content: "✦";
-    position: absolute;
-    top: 1.05rem;
-    left: 1rem;
+.signature-signed-state span {
     color: var(--aqua);
-    font-size: 0.72rem;
+    font-size: 0.78rem;
+}
+
+.signature-signed-state strong {
+    font-weight: 600;
 }
 
 /* Rule cards */
@@ -1236,7 +1212,6 @@ footer .footer-meta { color: var(--muted); font-family: var(--sans); font-size: 
     .nav-links a { font-family: var(--serif); font-size: 2.2rem; letter-spacing: 0.02em; text-transform: none; }
     .rules-grid, .contract-grid, .feature-card, .content-grid { grid-template-columns: 1fr; }
     .contract-signature { grid-template-columns: 1fr; align-items: start; }
-    .signature-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .feature-card { gap: 3rem; }
     .feature-card-reverse .feature-copy, .feature-card-reverse .section-emblem { order: initial; }
     .astral-compass { width: min(68vw, 270px); }
@@ -1258,8 +1233,8 @@ footer .footer-meta { color: var(--muted); font-family: var(--sans); font-size: 
     .feature-card, .chronicle-card, .rule-card { border-radius: 1rem; }
     .rule-card { min-height: 390px; }
     .contract-card { min-height: 220px; }
-    .contract-signature, .contract-signers { padding: 1.25rem; }
-    .signature-controls, .signature-list { grid-template-columns: 1fr; }
+    .contract-signature { padding: 1.25rem; }
+    .signature-controls { grid-template-columns: 1fr; }
     .boton { width: 100%; justify-content: space-between; }
     .page-hero { min-height: 58svh; }
     .page-hero::after { opacity: 0.65; }

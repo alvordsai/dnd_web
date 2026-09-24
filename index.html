@@ -55,7 +55,7 @@ footer_text: Mistelar · Historias bajo un mismo cielo
         <div class="signature-copy">
             <p class="section-kicker">Firma del contrato</p>
             <h3>Deja constancia de tu compromiso</h3>
-            <p>Escribe tu nombre para añadirlo a la lista de firmantes de este navegador.</p>
+            <p>Escribe tu nombre para confirmar tu compromiso en este navegador.</p>
         </div>
         <form id="contract-signature-form" class="signature-form">
             <label for="signature-name">Tu nombre</label>
@@ -64,17 +64,12 @@ footer_text: Mistelar · Historias bajo un mismo cielo
                 <button type="submit" class="boton signature-submit"><span>Firmar</span><span aria-hidden="true">✦</span></button>
             </div>
             <p id="signature-feedback" class="signature-feedback" role="status" aria-live="polite"></p>
-            <p id="signature-storage-note" class="signature-storage-note">Las firmas solo se guardan en este navegador y no se comparten con otros dispositivos.</p>
+            <p id="signature-storage-note" class="signature-storage-note">La firma solo se guarda en este navegador y no se comparte con otros dispositivos.</p>
         </form>
-    </div>
-
-    <div class="contract-signers" aria-labelledby="signature-list-title">
-        <div class="signature-list-heading">
-            <p class="section-kicker">Firmantes</p>
-            <h3 id="signature-list-title">Quienes han firmado</h3>
+        <div id="signature-signed-state" class="signature-signed-state" role="status" aria-live="polite" hidden>
+            <span aria-hidden="true">✦</span>
+            <strong>Has firmado</strong>
         </div>
-        <p id="signature-empty" class="signature-empty">Todavía no hay firmas guardadas en este navegador.</p>
-        <ul id="signature-list" class="signature-list" aria-label="Firmas guardadas en este navegador" hidden></ul>
     </div>
 </section>
 
