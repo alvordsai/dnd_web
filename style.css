@@ -136,17 +136,6 @@ button, input, textarea, select { font: inherit; }
     mask: url("images/mistelar-logo.png") center / contain no-repeat;
 }
 
-.logo-mark {
-    display: grid;
-    width: 2.1rem;
-    height: 2.1rem;
-    place-items: center;
-    border: 1px solid rgba(124, 231, 230, 0.52);
-    border-radius: 50%;
-    color: var(--aqua);
-    box-shadow: inset 0 0 1rem rgba(124, 231, 230, 0.18), 0 0 1.4rem rgba(124, 231, 230, 0.12);
-}
-
 .nav-links { display: flex; align-items: center; gap: 2rem; }
 
 .nav-links a {
