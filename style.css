@@ -543,6 +543,79 @@ button, input, textarea, select { font: inherit; }
 .boton:hover span:last-child { transform: translate(2px, -2px); }
 .boton-secundario { width: 100%; justify-content: space-between; border-color: var(--line); background: rgba(255, 255, 255, 0.025); box-shadow: none; }
 
+/* Social contract */
+.contract-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.2rem;
+}
+
+.contract-card {
+    position: relative;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 2rem;
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    background: linear-gradient(155deg, rgba(14, 37, 60, 0.78), rgba(7, 16, 35, 0.94));
+    isolation: isolate;
+    transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+
+.contract-card::before {
+    content: "";
+    position: absolute;
+    top: -5rem;
+    right: -5rem;
+    z-index: -1;
+    width: 12rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124, 231, 230, 0.2), rgba(182, 147, 255, 0.1) 45%, transparent 72%);
+    filter: blur(0.5rem);
+}
+
+.contract-card:hover {
+    border-color: rgba(124, 231, 230, 0.52);
+    box-shadow: 0 1.2rem 3.5rem rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+.contract-number {
+    position: absolute;
+    top: 1.7rem;
+    right: 1.8rem;
+    color: rgba(238, 250, 255, 0.28);
+    font-family: var(--serif);
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+}
+
+.contract-mark {
+    display: grid;
+    width: 3.8rem;
+    height: 3.8rem;
+    place-items: center;
+    border: 1px solid rgba(124, 231, 230, 0.24);
+    border-radius: 50%;
+    color: var(--aqua);
+    font-family: var(--serif);
+    font-size: 1.55rem;
+    box-shadow: inset 0 0 1.6rem rgba(124, 231, 230, 0.08);
+}
+
+.contract-card h3 {
+    max-width: 17ch;
+    margin: auto 0 0;
+    font-family: var(--serif);
+    font-size: clamp(1.65rem, 2.7vw, 2.25rem);
+    font-weight: 500;
+    line-height: 1.08;
+    text-wrap: balance;
+}
+
 /* Rule cards */
 .rules-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
 
@@ -1025,7 +1098,7 @@ footer .footer-meta { color: var(--muted); font-family: var(--sans); font-size: 
 
     .nav-links.is-open { opacity: 1; pointer-events: auto; transform: translateY(0); }
     .nav-links a { font-family: var(--serif); font-size: 2.2rem; letter-spacing: 0.02em; text-transform: none; }
-    .rules-grid, .feature-card, .content-grid { grid-template-columns: 1fr; }
+    .rules-grid, .contract-grid, .feature-card, .content-grid { grid-template-columns: 1fr; }
     .feature-card { gap: 3rem; }
     .feature-card-reverse .feature-copy, .feature-card-reverse .section-emblem { order: initial; }
     .astral-compass { width: min(68vw, 270px); }
@@ -1046,6 +1119,7 @@ footer .footer-meta { color: var(--muted); font-family: var(--sans); font-size: 
     .section-shell { padding: 5rem 0; }
     .feature-card, .chronicle-card, .rule-card { border-radius: 1rem; }
     .rule-card { min-height: 390px; }
+    .contract-card { min-height: 220px; }
     .boton { width: 100%; justify-content: space-between; }
     .page-hero { min-height: 58svh; }
     .page-hero::after { opacity: 0.65; }
