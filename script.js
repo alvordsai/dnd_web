@@ -358,3 +358,72 @@
         audio.pause();
     });
 })();
+
+// Introduction image showcase.
+(() => {
+    "use strict";
+
+    const showcase = document.querySelector("[data-showcase]");
+    if (!showcase) return;
+
+    const slides = Array.from(showcase.querySelectorAll("[data-showcase-slide]"));
+    const indicators = Array.from(showcase.querySelectorAll(".showcase-indicators span"));
+    const toggle = showcase.querySelector("[data-showcase-toggle]");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (slides.length < 2 || !toggle) return;
+
+    const INTERVAL = 1000;
+    let currentSlide = 0;
+    let intervalId = 0;
+    let paused = reduceMotion;
+
+    const renderSlide = (nextSlide) => {
+        currentSlide = nextSlide;
+
+        slides.forEach((slide, index) => {
+            const isActive = index === currentSlide;
+            slide.classList.toggle("is-active", isActive);
+            slide.setAttribute("aria-hidden", String(!isActive));
+            indicators[index]?.classList.toggle("is-active", isActive);
+        });
+    };
+
+    const stopRotation = () => {
+        if (!intervalId) return;
+        window.clearInterval(intervalId);
+        intervalId = 0;
+    };
+
+    const startRotation = () => {
+        if (paused || document.hidden || intervalId) return;
+        intervalId = window.setInterval(() => {
+            renderSlide((currentSlide + 1) % slides.length);
+        }, INTERVAL);
+    };
+
+    const syncToggle = () => {
+        toggle.textContent = paused ? "Reanudar galería" : "Pausar galería";
+        toggle.setAttribute("aria-pressed", String(paused));
+    };
+
+    if (reduceMotion) {
+        toggle.hidden = true;
+    } else {
+        syncToggle();
+        startRotation();
+
+        toggle.addEventListener("click", () => {
+            paused = !paused;
+            syncToggle();
+            if (paused) stopRotation();
+            else startRotation();
+        });
+
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) stopRotation();
+            else startRotation();
+        });
+
+        window.addEventListener("pagehide", stopRotation, { once: true });
+    }
+})();
