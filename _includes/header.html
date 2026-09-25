@@ -16,11 +16,13 @@
                 <a href="#sesion-cero">Contrato</a>
                 <a href="#nave">Nave</a>
                 <a href="#personajes">Personajes</a>
+                <a href="#detalles-tecnicos">Detalles técnicos</a>
                 <a href="#reglas">Reglas</a>
                 <a href="#cronicas">Crónicas</a>
             {% else %}
                 <a href="{{ '/nave.html' | relative_url }}"{% if page.section == 'nave' %} aria-current="page"{% endif %}>Nave</a>
                 <a href="{{ '/personajes.html' | relative_url }}"{% if page.section == 'personajes' %} aria-current="page"{% endif %}>Personajes</a>
+                <a href="{{ '/index.html#detalles-tecnicos' | relative_url }}">Detalles técnicos</a>
                 <a href="{{ '/index.html#reglas' | relative_url }}">Reglas</a>
                 <a href="{{ '/cronicas.html' | relative_url }}"{% if page.section == 'cronicas' %} aria-current="page"{% endif %}>Crónicas</a>
             {% endif %}
