@@ -135,14 +135,22 @@ footer_text: Mistelar · Historias bajo un mismo cielo
 
     <section id="pjs" class="character-subsection" aria-labelledby="pjs-title">
         <div class="character-subsection-heading">
-            <h3 id="pjs-title">PJ</h3>
+            <div>
+                <p class="section-kicker">Personajes jugadores</p>
+                <h3 id="pjs-title">PJ</h3>
+            </div>
+            <p>Los aventureros controlados por los jugadores y protagonistas de la campaña.</p>
         </div>
         {% include character-grid.html type="pj" empty_text="Todavía no hay personajes jugadores." %}
     </section>
 
     <section id="pnjs" class="character-subsection" aria-labelledby="pnjs-title">
         <div class="character-subsection-heading">
-            <h3 id="pnjs-title">PNJ</h3>
+            <div>
+                <p class="section-kicker">Personajes no jugadores</p>
+                <h3 id="pnjs-title">PNJ</h3>
+            </div>
+            <p>Aliados, rivales y habitantes del universo controlados por el director de juego.</p>
         </div>
         {% include character-grid.html type="pnj" empty_text="Todavía no hay personajes no jugadores." %}
     </section>
@@ -230,10 +238,13 @@ footer_text: Mistelar · Historias bajo un mismo cielo
     </div>
 </section>
 
-<section id="cronicas" class="section-shell reveal">
+<section id="cronicas" class="section-shell reveal" aria-labelledby="cronicas-title">
+    <div class="section-heading">
+        <h2 id="cronicas-title">Crónicas</h2>
+    </div>
     <div class="chronicle-card">
-        <div>
-            <h2>Crónicas</h2>
+        <div class="feature-copy">
+            <h3>Bitácora de la tripulación</h3>
             <p>El registro de las sesiones y decisiones de la tripulación.</p>
         </div>
         <a href="{{ '/cronicas.html' | relative_url }}" class="boton"><span>Leer crónicas</span><span aria-hidden="true">↗</span></a>
