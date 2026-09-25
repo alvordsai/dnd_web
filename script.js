@@ -366,25 +366,37 @@
     const showcase = document.querySelector("[data-showcase]");
     if (!showcase) return;
 
+    const viewport = showcase.querySelector(".showcase-viewport");
     const slides = Array.from(showcase.querySelectorAll("[data-showcase-slide]"));
-    const indicators = Array.from(showcase.querySelectorAll(".showcase-indicators span"));
+    const indicators = Array.from(showcase.querySelectorAll("[data-showcase-indicator]"));
+    const previousButton = showcase.querySelector("[data-showcase-prev]");
+    const nextButton = showcase.querySelector("[data-showcase-next]");
     const toggle = showcase.querySelector("[data-showcase-toggle]");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (slides.length < 2 || !toggle) return;
+    if (slides.length < 2) return;
 
-    const INTERVAL = 1000;
+    const INTERVAL = 6000;
+    const SWIPE_DISTANCE = 50;
     let currentSlide = 0;
     let intervalId = 0;
     let paused = reduceMotion;
+    let pointerStartX = null;
+    let activePointerId = null;
 
     const renderSlide = (nextSlide) => {
-        currentSlide = nextSlide;
+        currentSlide = (nextSlide + slides.length) % slides.length;
 
         slides.forEach((slide, index) => {
             const isActive = index === currentSlide;
             slide.classList.toggle("is-active", isActive);
             slide.setAttribute("aria-hidden", String(!isActive));
-            indicators[index]?.classList.toggle("is-active", isActive);
+
+            const indicator = indicators[index];
+            if (indicator) {
+                indicator.classList.toggle("is-active", isActive);
+                if (isActive) indicator.setAttribute("aria-current", "true");
+                else indicator.removeAttribute("aria-current");
+            }
         });
     };
 
@@ -397,27 +409,91 @@
     const startRotation = () => {
         if (paused || document.hidden || intervalId) return;
         intervalId = window.setInterval(() => {
-            renderSlide((currentSlide + 1) % slides.length);
+            renderSlide(currentSlide + 1);
         }, INTERVAL);
     };
 
+    const showSlide = (nextSlide, restartTimer = true) => {
+        renderSlide(nextSlide);
+
+        if (restartTimer && !paused) {
+            stopRotation();
+            startRotation();
+        }
+    };
+
+    const showPrevious = () => showSlide(currentSlide - 1);
+    const showNext = () => showSlide(currentSlide + 1);
+
+    previousButton?.addEventListener("click", showPrevious);
+    nextButton?.addEventListener("click", showNext);
+
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener("click", () => showSlide(index));
+    });
+
+    showcase.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") {
+            event.preventDefault();
+            showPrevious();
+        }
+
+        if (event.key === "ArrowRight") {
+            event.preventDefault();
+            showNext();
+        }
+    });
+
+    if (viewport) {
+        viewport.addEventListener("dragstart", (event) => event.preventDefault());
+
+        viewport.addEventListener("pointerdown", (event) => {
+            if (event.pointerType === "mouse" && event.button !== 0) return;
+            pointerStartX = event.clientX;
+            activePointerId = event.pointerId;
+            viewport.setPointerCapture?.(event.pointerId);
+        });
+
+        viewport.addEventListener("pointerup", (event) => {
+            if (pointerStartX === null || event.pointerId !== activePointerId) return;
+
+            const distance = event.clientX - pointerStartX;
+            pointerStartX = null;
+            activePointerId = null;
+
+            if (Math.abs(distance) < SWIPE_DISTANCE) return;
+            if (distance > 0) showPrevious();
+            else showNext();
+        });
+
+        viewport.addEventListener("pointercancel", () => {
+            pointerStartX = null;
+            activePointerId = null;
+        });
+    }
+
     const syncToggle = () => {
+        if (!toggle) return;
         toggle.textContent = paused ? "Reanudar galería" : "Pausar galería";
         toggle.setAttribute("aria-pressed", String(paused));
     };
 
-    if (reduceMotion) {
-        toggle.hidden = true;
-    } else {
-        syncToggle();
-        startRotation();
-
-        toggle.addEventListener("click", () => {
-            paused = !paused;
+    if (toggle) {
+        if (reduceMotion) {
+            toggle.hidden = true;
+        } else {
             syncToggle();
-            if (paused) stopRotation();
-            else startRotation();
-        });
+            toggle.addEventListener("click", () => {
+                paused = !paused;
+                syncToggle();
+                if (paused) stopRotation();
+                else startRotation();
+            });
+        }
+    }
+
+    if (!reduceMotion) {
+        startRotation();
 
         document.addEventListener("visibilitychange", () => {
             if (document.hidden) stopRotation();

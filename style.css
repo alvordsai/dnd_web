@@ -1277,6 +1277,15 @@ footer .footer-meta { color: var(--muted); font-family: var(--sans); font-size: 
     aspect-ratio: 16 / 9;
     min-height: 420px;
     isolation: isolate;
+    touch-action: pan-y;
+    cursor: grab;
+}
+
+.showcase-viewport:active { cursor: grabbing; }
+
+.image-showcase:focus-visible {
+    outline: 2px solid var(--aqua);
+    outline-offset: 4px;
 }
 
 .showcase-viewport::after {
@@ -1297,7 +1306,7 @@ footer .footer-meta { color: var(--muted); font-family: var(--sans); font-size: 
     opacity: 0;
     pointer-events: none;
     transform: scale(1.035);
-    transition: opacity 600ms ease, transform 1200ms ease;
+    transition: opacity 900ms ease, transform 1800ms ease;
 }
 
 .showcase-slide.is-active {
@@ -1311,7 +1320,41 @@ footer .footer-meta { color: var(--muted); font-family: var(--sans); font-size: 
     display: block;
     object-fit: cover;
     object-position: center 28%;
+    user-select: none;
+    -webkit-user-drag: none;
 }
+
+.showcase-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    display: grid;
+    width: 3.25rem;
+    height: 3.25rem;
+    padding: 0;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 50%;
+    background: rgba(3, 8, 19, 0.58);
+    color: var(--ink);
+    font: 400 1.35rem/1 var(--sans);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: border-color 180ms ease, background 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.showcase-arrow-prev { left: clamp(0.75rem, 2vw, 1.5rem); }
+.showcase-arrow-next { right: clamp(0.75rem, 2vw, 1.5rem); }
+
+.showcase-arrow:hover,
+.showcase-arrow:focus-visible {
+    border-color: var(--aqua);
+    background: rgba(3, 8, 19, 0.84);
+    color: var(--aqua);
+}
+
+.showcase-arrow:hover { transform: translateY(-50%) scale(1.06); }
 
 .showcase-controls {
     position: absolute;
@@ -1331,16 +1374,25 @@ footer .footer-meta { color: var(--muted); font-family: var(--sans); font-size: 
     gap: 0.55rem;
 }
 
-.showcase-indicators span {
+.showcase-indicators button {
     width: 1.8rem;
     height: 2px;
+    padding: 0;
+    border: 0;
     background: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
     transition: width 240ms ease, background 240ms ease;
 }
 
-.showcase-indicators span.is-active {
+.showcase-indicators button.is-active {
     width: 3.4rem;
     background: var(--aqua);
+}
+
+.showcase-indicators button:hover,
+.showcase-indicators button:focus-visible {
+    background: var(--aqua);
+    outline: none;
 }
 
 .showcase-toggle {
@@ -1372,8 +1424,8 @@ footer .footer-meta { color: var(--muted); font-family: var(--sans); font-size: 
         aspect-ratio: 4 / 5;
     }
     .showcase-slide img { object-position: center top; }
-    .showcase-indicators span { width: 1.2rem; }
-    .showcase-indicators span.is-active { width: 2.4rem; }
+    .showcase-indicators button { width: 1.2rem; }
+    .showcase-indicators button.is-active { width: 2.4rem; }
     .showcase-toggle {
         min-height: 2.75rem;
         padding-right: 0.8rem;

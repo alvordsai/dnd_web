@@ -29,7 +29,7 @@ footer_text: Mistelar · Historias bajo un mismo cielo
         <h2 id="introduccion-title">Introducción</h2>
     </div>
 
-    <div class="image-showcase" data-showcase aria-roledescription="carrusel" aria-label="Introducción visual a Mistelar">
+    <div class="image-showcase" data-showcase tabindex="0" aria-roledescription="carrusel" aria-label="Introducción visual a Mistelar">
         <div class="showcase-viewport">
             <figure class="showcase-slide is-active" data-showcase-slide aria-hidden="false">
                 <img src="{{ '/carousel/Mirt_alter.jpg' | relative_url }}" alt="Mirt ante el mar astral" fetchpriority="high">
@@ -51,14 +51,21 @@ footer_text: Mistelar · Historias bajo un mismo cielo
             </figure>
         </div>
 
+        <button class="showcase-arrow showcase-arrow-prev" type="button" data-showcase-prev aria-label="Imagen anterior">
+            <span aria-hidden="true">←</span>
+        </button>
+        <button class="showcase-arrow showcase-arrow-next" type="button" data-showcase-next aria-label="Imagen siguiente">
+            <span aria-hidden="true">→</span>
+        </button>
+
         <div class="showcase-controls">
-            <div class="showcase-indicators" aria-hidden="true">
-                <span class="is-active"></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="showcase-indicators" aria-label="Seleccionar imagen">
+                <button class="is-active" type="button" data-showcase-indicator aria-label="Ver imagen 1" aria-current="true"></button>
+                <button type="button" data-showcase-indicator aria-label="Ver imagen 2"></button>
+                <button type="button" data-showcase-indicator aria-label="Ver imagen 3"></button>
+                <button type="button" data-showcase-indicator aria-label="Ver imagen 4"></button>
+                <button type="button" data-showcase-indicator aria-label="Ver imagen 5"></button>
+                <button type="button" data-showcase-indicator aria-label="Ver imagen 6"></button>
             </div>
             <button class="showcase-toggle" type="button" data-showcase-toggle aria-pressed="false">Pausar galería</button>
         </div>
