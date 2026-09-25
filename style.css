@@ -410,7 +410,7 @@ button, input, textarea, select { font: inherit; }
 .section-heading { margin-bottom: 2.6rem; }
 .section-kicker, .card-label { margin: 0 0 0.45rem; }
 
-.section-heading h2, .chronicle-card h2, .page-hero h1 {
+.section-heading h2, .page-hero h1 {
     margin: 0;
     font-family: var(--serif);
     font-size: clamp(3rem, 6vw, 5.7rem);
@@ -866,7 +866,7 @@ button, input, textarea, select { font: inherit; }
     padding: 0;
     border: 0;
     font-family: var(--serif);
-    font-size: clamp(2.5rem, 5vw, 4.25rem);
+    font-size: clamp(2rem, 4vw, 3.25rem);
     font-weight: 500;
     letter-spacing: -0.03em;
     line-height: 1;
@@ -1145,7 +1145,7 @@ button, input, textarea, select { font: inherit; }
 .chronicle-list { display: grid; gap: 1rem; }
 .log-entry { display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; padding: 2rem; }
 .log-number { color: var(--aqua); font-family: var(--serif); font-size: 2.5rem; line-height: 1; }
-.log-entry h2 { margin: 0; font-family: var(--serif); font-size: 2rem; font-weight: 600; }
+.log-entry h3 { margin: 0; font-family: var(--serif); font-size: 2rem; font-weight: 600; }
 .log-entry p { margin-bottom: 0; }
 
 /* Footer */
