@@ -226,14 +226,50 @@ footer_text: Mistelar · Historias bajo un mismo cielo
 </section>
 
 <section id="cronicas" class="section-shell reveal" aria-labelledby="cronicas-title">
-    <div class="section-heading">
-        <h2 id="cronicas-title">Crónicas</h2>
-    </div>
-    <div class="chronicle-card">
-        <div class="feature-copy">
-            <h3>Bitácora de la tripulación</h3>
-            <p>El registro de las sesiones y decisiones de la tripulación.</p>
+    <div class="section-heading section-heading-split">
+        <div>
+            <p class="section-kicker">Bitácora de campaña</p>
+            <h2 id="cronicas-title">Crónicas</h2>
         </div>
-        <a href="{{ '/cronicas.html' | relative_url }}" class="boton"><span>Leer crónicas</span><span aria-hidden="true">↗</span></a>
+        <p>Los últimos viajes de la tripulación, con el resto del archivo disponible sin salir de la página principal.</p>
     </div>
+
+    {% assign cronicas_ordenadas = site.cronicas | sort: "order" | reverse %}
+
+    {% if cronicas_ordenadas.size > 0 %}
+        <div class="chronicle-featured-grid" aria-label="Últimas crónicas">
+            {% for cronica in cronicas_ordenadas limit: 3 %}
+                <article class="chronicle-featured">
+                    <div>
+                        <span class="rule-pill">{{ cronica.session_label | default: "Crónica" }}{% if cronica.date_label %} · {{ cronica.date_label }}{% endif %}</span>
+                        <h3>{{ cronica.title }}</h3>
+                        {% if cronica.summary %}<p>{{ cronica.summary }}</p>{% endif %}
+                    </div>
+                    <a href="{{ cronica.url | relative_url }}" class="chronicle-link" aria-label="Leer {{ cronica.title }}">
+                        <span>Leer crónica</span><span aria-hidden="true">↗</span>
+                    </a>
+                </article>
+            {% endfor %}
+        </div>
+
+        {% if cronicas_ordenadas.size > 3 %}
+            <div class="chronicle-archive">
+                <div class="chronicle-archive-heading">
+                    <h3>Archivo completo</h3>
+                    <span>{{ cronicas_ordenadas.size | minus: 3 }} anteriores</span>
+                </div>
+                <div class="chronicle-scroll" tabindex="0" aria-label="Crónicas anteriores">
+                    {% for cronica in cronicas_ordenadas offset: 3 %}
+                        <a class="chronicle-row" href="{{ cronica.url | relative_url }}">
+                            <span class="chronicle-row-meta">{{ cronica.session_label | default: "Crónica" }}{% if cronica.date_label %} · {{ cronica.date_label }}{% endif %}</span>
+                            <strong>{{ cronica.title }}</strong>
+                            <span aria-hidden="true">→</span>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="character-empty"><p>Todavía no hay crónicas publicadas.</p></div>
+    {% endif %}
 </section>
