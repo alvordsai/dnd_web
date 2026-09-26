@@ -2,6 +2,9 @@ collections:
   personajes:
     output: true
     permalink: /personajes/:name/
+  cronicas:
+    output: true
+    permalink: /cronicas/:name/
 
 defaults:
   - scope:
@@ -12,3 +15,11 @@ defaults:
       body_class: inner-page character-page
       section: personajes
       footer_text: Mistelar · Rostros del firmamento
+  - scope:
+      path: ""
+      type: cronicas
+    values:
+      layout: cronica
+      body_class: inner-page chronicle-page
+      section: cronicas
+      footer_text: Mistelar · Bitácora de la tripulación
