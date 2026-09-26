@@ -359,147 +359,151 @@
     });
 })();
 
-// Introduction image showcase.
+// Image showcases.
 (() => {
     "use strict";
 
-    const showcase = document.querySelector("[data-showcase]");
-    if (!showcase) return;
+    const showcases = Array.from(document.querySelectorAll("[data-showcase]"));
+    if (!showcases.length) return;
 
-    const viewport = showcase.querySelector(".showcase-viewport");
-    const slides = Array.from(showcase.querySelectorAll("[data-showcase-slide]"));
-    const indicators = Array.from(showcase.querySelectorAll("[data-showcase-indicator]"));
-    const previousButton = showcase.querySelector("[data-showcase-prev]");
-    const nextButton = showcase.querySelector("[data-showcase-next]");
-    const toggle = showcase.querySelector("[data-showcase-toggle]");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (slides.length < 2) return;
-
     const INTERVAL = 6000;
     const SWIPE_DISTANCE = 50;
-    let currentSlide = 0;
-    let intervalId = 0;
-    let paused = reduceMotion;
-    let pointerStartX = null;
-    let activePointerId = null;
 
-    const renderSlide = (nextSlide) => {
-        currentSlide = (nextSlide + slides.length) % slides.length;
+    showcases.forEach((showcase) => {
+        const viewport = showcase.querySelector(".showcase-viewport");
+        const slides = Array.from(showcase.querySelectorAll("[data-showcase-slide]"));
+        const indicators = Array.from(showcase.querySelectorAll("[data-showcase-indicator]"));
+        const previousButton = showcase.querySelector("[data-showcase-prev]");
+        const nextButton = showcase.querySelector("[data-showcase-next]");
+        const toggle = showcase.querySelector("[data-showcase-toggle]");
 
-        slides.forEach((slide, index) => {
-            const isActive = index === currentSlide;
-            slide.classList.toggle("is-active", isActive);
-            slide.setAttribute("aria-hidden", String(!isActive));
+        if (slides.length < 2) return;
 
-            const indicator = indicators[index];
-            if (indicator) {
-                indicator.classList.toggle("is-active", isActive);
-                if (isActive) indicator.setAttribute("aria-current", "true");
-                else indicator.removeAttribute("aria-current");
+        let currentSlide = 0;
+        let intervalId = 0;
+        let paused = reduceMotion;
+        let pointerStartX = null;
+        let activePointerId = null;
+
+        const renderSlide = (nextSlide) => {
+            currentSlide = (nextSlide + slides.length) % slides.length;
+
+            slides.forEach((slide, index) => {
+                const isActive = index === currentSlide;
+                slide.classList.toggle("is-active", isActive);
+                slide.setAttribute("aria-hidden", String(!isActive));
+
+                const indicator = indicators[index];
+                if (indicator) {
+                    indicator.classList.toggle("is-active", isActive);
+                    if (isActive) indicator.setAttribute("aria-current", "true");
+                    else indicator.removeAttribute("aria-current");
+                }
+            });
+        };
+
+        const stopRotation = () => {
+            if (!intervalId) return;
+            window.clearInterval(intervalId);
+            intervalId = 0;
+        };
+
+        const startRotation = () => {
+            if (paused || document.hidden || intervalId) return;
+            intervalId = window.setInterval(() => {
+                renderSlide(currentSlide + 1);
+            }, INTERVAL);
+        };
+
+        const showSlide = (nextSlide, restartTimer = true) => {
+            renderSlide(nextSlide);
+
+            if (restartTimer && !paused) {
+                stopRotation();
+                startRotation();
+            }
+        };
+
+        const showPrevious = () => showSlide(currentSlide - 1);
+        const showNext = () => showSlide(currentSlide + 1);
+
+        previousButton?.addEventListener("click", showPrevious);
+        nextButton?.addEventListener("click", showNext);
+
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener("click", () => showSlide(index));
+        });
+
+        showcase.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowLeft") {
+                event.preventDefault();
+                showPrevious();
+            }
+
+            if (event.key === "ArrowRight") {
+                event.preventDefault();
+                showNext();
             }
         });
-    };
 
-    const stopRotation = () => {
-        if (!intervalId) return;
-        window.clearInterval(intervalId);
-        intervalId = 0;
-    };
+        if (viewport) {
+            viewport.addEventListener("dragstart", (event) => event.preventDefault());
 
-    const startRotation = () => {
-        if (paused || document.hidden || intervalId) return;
-        intervalId = window.setInterval(() => {
-            renderSlide(currentSlide + 1);
-        }, INTERVAL);
-    };
+            viewport.addEventListener("pointerdown", (event) => {
+                if (event.pointerType === "mouse" && event.button !== 0) return;
+                pointerStartX = event.clientX;
+                activePointerId = event.pointerId;
+                viewport.setPointerCapture?.(event.pointerId);
+            });
 
-    const showSlide = (nextSlide, restartTimer = true) => {
-        renderSlide(nextSlide);
+            viewport.addEventListener("pointerup", (event) => {
+                if (pointerStartX === null || event.pointerId !== activePointerId) return;
 
-        if (restartTimer && !paused) {
-            stopRotation();
-            startRotation();
-        }
-    };
+                const distance = event.clientX - pointerStartX;
+                pointerStartX = null;
+                activePointerId = null;
 
-    const showPrevious = () => showSlide(currentSlide - 1);
-    const showNext = () => showSlide(currentSlide + 1);
+                if (Math.abs(distance) < SWIPE_DISTANCE) return;
+                if (distance > 0) showPrevious();
+                else showNext();
+            });
 
-    previousButton?.addEventListener("click", showPrevious);
-    nextButton?.addEventListener("click", showNext);
-
-    indicators.forEach((indicator, index) => {
-        indicator.addEventListener("click", () => showSlide(index));
-    });
-
-    showcase.addEventListener("keydown", (event) => {
-        if (event.key === "ArrowLeft") {
-            event.preventDefault();
-            showPrevious();
-        }
-
-        if (event.key === "ArrowRight") {
-            event.preventDefault();
-            showNext();
-        }
-    });
-
-    if (viewport) {
-        viewport.addEventListener("dragstart", (event) => event.preventDefault());
-
-        viewport.addEventListener("pointerdown", (event) => {
-            if (event.pointerType === "mouse" && event.button !== 0) return;
-            pointerStartX = event.clientX;
-            activePointerId = event.pointerId;
-            viewport.setPointerCapture?.(event.pointerId);
-        });
-
-        viewport.addEventListener("pointerup", (event) => {
-            if (pointerStartX === null || event.pointerId !== activePointerId) return;
-
-            const distance = event.clientX - pointerStartX;
-            pointerStartX = null;
-            activePointerId = null;
-
-            if (Math.abs(distance) < SWIPE_DISTANCE) return;
-            if (distance > 0) showPrevious();
-            else showNext();
-        });
-
-        viewport.addEventListener("pointercancel", () => {
-            pointerStartX = null;
-            activePointerId = null;
-        });
-    }
-
-    const syncToggle = () => {
-        if (!toggle) return;
-        toggle.textContent = paused ? "Reanudar galería" : "Pausar galería";
-        toggle.setAttribute("aria-pressed", String(paused));
-    };
-
-    if (toggle) {
-        if (reduceMotion) {
-            toggle.hidden = true;
-        } else {
-            syncToggle();
-            toggle.addEventListener("click", () => {
-                paused = !paused;
-                syncToggle();
-                if (paused) stopRotation();
-                else startRotation();
+            viewport.addEventListener("pointercancel", () => {
+                pointerStartX = null;
+                activePointerId = null;
             });
         }
-    }
 
-    if (!reduceMotion) {
-        startRotation();
+        const syncToggle = () => {
+            if (!toggle) return;
+            toggle.textContent = paused ? "Reanudar galería" : "Pausar galería";
+            toggle.setAttribute("aria-pressed", String(paused));
+        };
 
-        document.addEventListener("visibilitychange", () => {
-            if (document.hidden) stopRotation();
-            else startRotation();
-        });
+        if (toggle) {
+            if (reduceMotion) {
+                toggle.hidden = true;
+            } else {
+                syncToggle();
+                toggle.addEventListener("click", () => {
+                    paused = !paused;
+                    syncToggle();
+                    if (paused) stopRotation();
+                    else startRotation();
+                });
+            }
+        }
 
-        window.addEventListener("pagehide", stopRotation, { once: true });
-    }
+        if (!reduceMotion) {
+            startRotation();
+
+            document.addEventListener("visibilitychange", () => {
+                if (document.hidden) stopRotation();
+                else startRotation();
+            });
+
+            window.addEventListener("pagehide", stopRotation, { once: true });
+        }
+    });
 })();
