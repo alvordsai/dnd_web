@@ -1263,6 +1263,10 @@ footer .footer-meta { color: var(--muted); font-family: var(--sans); font-size: 
     padding-top: 6.5rem;
 }
 
+.image-showcase + .image-showcase {
+    margin-top: 2rem;
+}
+
 .image-showcase {
     position: relative;
     overflow: hidden;
